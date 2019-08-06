@@ -1,1 +1,1 @@
-web gunicorn ROOT=backend server:app
+web gunicorn backend.server:app
