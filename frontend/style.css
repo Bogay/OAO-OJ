@@ -1,18 +1,42 @@
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Noto+Serif+TC&display=swap');
+
+@font-face {
+  	font-family: custom;
+    src: local("Noto Serif TC");
+    unicode-range: U+00-024F;
+}
+
+@font-face {
+  font-family: custom;
+    src: local("Noto Sans TC");
+    unicode-range: U+4E00-9FFF;
+}
+
+body {
+	background-color: #dcdcdd;
+	color: #2a2f35;
+	font-family: custom, "Noto Sans TC", Serif;
+}
+
+
 #info {
 	position: absolute;
 	left: 0%;
-	width: 50%;
+	width: 46%;
 	height: 100%;
 	padding-left: 2%;
+	padding-right: 2%;
 }
 
 #prefer {
 	position: absolute;
 	top: 0%;
 	left: 50%;
-	width: 50%;
+	width: 46%;
 	height: 10%;
 	padding-left: 2%;
+	padding-right: 2%;
 }
 
 .flex-container {
@@ -37,17 +61,17 @@
 #editor {
     position: absolute;
     top: 10%;
-    left: 50%;
-	width: 50%;
+    left: 52%;
+	width: 46%;
 	height: 50%;
-	padding-left: 2%;
 }
 
 #run {
 	position: absolute;
 	top: 60%;
 	left: 50%;
-	width: 50%;
+	width: 46%;
 	height: 40%;
 	padding-left: 2%;
+	padding-right: 2%;
 }
