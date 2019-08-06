@@ -1,13 +1,13 @@
-# Hello, OAO-OJ
+# Is it a prime number?
 
 ## Problem Description
 
-say hello to OAO-OJ!
+give you a number N, tell me whether it is a prime number.
 
 ## Input Format
 
-no input in this problem
+only a positive integer N.
 
 ## Output Format
 
-print `hello, OAO-OJ` in one line
+print `yes` if it is a prime number, `no` otherwise.

@@ -19,8 +19,8 @@
     <!-- Editor Style Setting -->
     <div id="prefer" class="flex-container">
         <div class="item fontsize-text">FontSize:</div>
-        <div class="item fontsize-select">
-            <select>
+        <div class="item fontsize-select-box">
+            <select id="fontsize-select" onchange="scale_font(this);">
 				<option value="8">8</option>
 				<option value="9">9</option>
 				<option value="10">10</option>
@@ -49,7 +49,7 @@
         var editor = ace.edit("editor");
         editor.setTheme("ace/theme/monokai");
         editor.session.setMode("ace/mode/python");
-        info();
+        $('#editor').css('fontSize', $('#fontsize-select').val() + 'px');
     </script>
 
 </body>
