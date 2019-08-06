@@ -12,12 +12,27 @@
 </head>
 
 <body>
-    <div id="info" class="info">
-        <h1>Description</h1>
-    </div>
-    <div id="prefer">
-        <h3>Editor Style Setting</h3>
-    </div>
+	<div id="info" class="info" ><h1>Description</h1></div>
+		<!-- Editor Style Setting -->
+	<div id="prefer" class="flex-container">
+		<div class="item fontsize-text">FontSize:</div>
+		<div class="item fontsize-select">
+			<select>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12" selected="selected">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="16">16</option>
+				<option value="18">18</option>
+				<option value="24">24</option>
+				<option value="36">36</option>
+				<option value="48">48</option>
+			</select>
+		</div>
+	</div>
     <div id="editor" class="editor"></div>
     <div id="run">
         <textarea id="input" rows="4" cols="20">Input</textarea>

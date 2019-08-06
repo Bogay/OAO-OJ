@@ -15,6 +15,25 @@
 	padding-left: 2%;
 }
 
+.flex-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.item {
+	display: flex;
+	align-items: flex-end;
+}
+
+.fontsize-text {
+	font-size: 1rem;
+}
+
+.fontsize-select {
+	font-size: 1rem;
+}
+
 #editor {
     position: absolute;
     top: 10%;
