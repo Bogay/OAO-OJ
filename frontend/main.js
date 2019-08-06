@@ -12,6 +12,6 @@ function test() {
 
 function scale_font(o) {
 	var fontsize = o.value + 'px';
-	console.log('fontSize: ' + fontsize);
+	console.log('o: ' + o);
     $('#editor').css('fontSize', fontsize);
 }
