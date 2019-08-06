@@ -1,7 +1,9 @@
 var editor;
 
 window.onload = () => {
-	editor = ace.edit('editor');
+    editor = ace.edit('editor');
+};
+
 url = "http://oao-oj.herokuapp.com";
 
 function test() {
@@ -20,7 +22,6 @@ function rmnewline() {
 	str = editor.getValue();
 	console.log('str befor: ' + str);
 	str = str.replace(/(\r\n|\r|\n)/g, ' ');
-	// str.replace(/\r/g, '');
 	console.log('str after: ' + str);
 	editor.setValue(str);
 }
@@ -34,6 +35,7 @@ function scale_font(o) {
 
 function info() {
     $.get(url, function(data) {
+        console.log(data);
         $("#info").html(marked(data));
     });
 }
