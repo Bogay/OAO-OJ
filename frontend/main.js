@@ -2,7 +2,14 @@ var editor;
 
 window.onload = () => {
 	editor = ace.edit('editor');
+}
+
 url = "http://oao-oj.herokuapp.com";
+
+function info() {
+    $.get(url, function(data) {
+        $("#info").html(marked(data));
+    });
 
 function test() {
     $.post(url, { 'input_data': $('#input').val(), 'output_data': $('#output').val(), 'script': editor.getValue() }, function(data) {
@@ -31,9 +38,4 @@ function scale_font(o) {
     $('#editor').css('fontSize', fontsize);
 }
 
-
-function info() {
-    $.get(url, function(data) {
-        $("#info").html(marked(data));
-    });
 }
