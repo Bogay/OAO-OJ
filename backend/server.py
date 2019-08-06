@@ -27,7 +27,7 @@ def submit():
         f.write(script)
     with open('a.in', 'w') as f:
         f.write(inData)
-    os.system(f'python3 a.py < a.in > a.out')
+    os.system('python3 a.py < a.in > a.out')
 
     return jsonify({'result': ['WA', 'AC'][readAll('a.out').rstrip() == outData]})
 
