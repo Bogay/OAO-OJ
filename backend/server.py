@@ -1,7 +1,10 @@
 import os
 from flask import Flask, request, render_template, jsonify
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 TMP_DIR = 'tmp'
 RES_DIR = 'res'
 TEST_DIR = f'{RES_DIR}/testdata'
