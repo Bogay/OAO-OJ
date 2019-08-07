@@ -2,60 +2,90 @@
 <html lang="en">
 
 <head>
+    <title>OAO-OJ</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <link rel=stylesheet type="text/css" href="markdownstyle.css">
     <link rel=stylesheet type="text/css" href="style.css">
     <script src="./ace-builds/src-noconflict/ace.js" type="text/javascript"></script>
     <script src="main.js" type="text/javascript"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <title>OAO-OJ</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 
 <body>
-    <div id="info" class="info">
-        <h1>Description</h1>
-    </div>
-    <!-- Editor Style Setting -->
-    <div id="prefer" class="flex-container">
-        <div class="item fontsize-text">FontSize: </div>
-        <div class=""></div>
-        <div class="item fontsize-select-box">
-            <select id="fontsize-select" onchange="scale_font(this);">
-				<option value="8">8</option>
-				<option value="9">9</option>
-				<option value="10">10</option>
-				<option value="11">11</option>
-				<option value="12" selected="selected">12</option>
-				<option value="13">13</option>
-				<option value="14">14</option>
-				<option value="16">16</option>
-				<option value="18">18</option>
-				<option value="24">24</option>
-				<option value="36">36</option>
-				<option value="48">48</option>
-			</select>
+<div class="container-fluid">
+    <div class="row">
+        <div id="info" class="col-sm-6 info">
+            <h1>Description</h1>
+        </div>
+
+        <div id="code-area" class="col-sm-6">
+            <div class="panel panel-default">
+                <!-- Editor Style Setting -->
+                <div id="fontsize-select-box" class="panel-heading">
+                    FontSize: 
+                    <select id="fontsize-select" onchange="scale_font(this);">
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12" selected="selected">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="24">24</option>
+                        <option value="36">36</option>
+                        <option value="48">48</option>
+                    </select>
+                </div>
+                <div class="panel-body">
+                    <div id="editor" class="editor"></div>
+                </div>
+            </div>
+            <div id="run">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#Input">Input</a></li>
+                    <li><a data-toggle="tab" href="#Output">Output</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div id="Input" class="tab-pane active">
+                        <textarea id="input" rows="8" placeholder="Input"></textarea>
+                    </div>
+                    <div id="Output" class="tab-pane">
+                        <textarea id="output" rows="8" placeholder="Output"></textarea>
+                    </div>
+                </div>
+                <button type="button" onclick="test()">Test</button>
+                <button type="button" onclick="submit()">Submit</button>
+                <button type="button" onclick="rmnewline()">Fuck Line Break</button>
+            </div>
         </div>
     </div>
-    <div id="editor" class="editor"></div>
-    <div id="run">
-        <textarea id="input" rows="4" cols="20" placeholder="Input"></textarea>
-        <textarea id="output" rows="4" cols="20" placeholder="Output"></textarea>
-        <button type="button" onclick=test()>Test</button>
-        <button type="button" onclick=submit()>Submit</button>
-        <button type="button" onclick=rmnewline()>Fuck Line Break</button>
-    </div>
+</div>
 
-    <script>
-        var editor = ace.edit("editor");
-        editor.setTheme("ace/theme/monokai");
-        editor.session.setMode("ace/mode/python");
-        editor.session.setUseWrapMode(true);
-        editor.setShowPrintMargin(false);
-        $('#editor').css('fontSize', $('#fontsize-select').val() + 'px');
-        info();
-    </script>
+<script>
+    var editor = ace.edit('editor');
+
+    editor.setOptions({
+        theme: 'ace/theme/monokai',
+        printMargin: false,
+        fontSize: $('#fontsize-select').val(),
+    })
+
+    editor.session.setOptions({
+        mode: 'ace/mode/python',
+        newLineMode: 'unix',
+        useSoftTabs: true,
+        tabSize: 4,
+        wrap: true,
+    })
+
+    info();
+</script>
 
 </body>
 

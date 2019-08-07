@@ -21,57 +21,40 @@ body {
 
 
 #info {
-	position: absolute;
-	left: 0%;
-	width: 46%;
-	/*height: 0%;*/
 	padding-left: 2%;
 	padding-right: 2%;
+	max-height: 100vh;
+	overflow-y: scroll;
 }
 
-#prefer {
-	position: absolute;
-	top: 0%;
-	left: 50%;
-	width: 46%;
-	height: 10%;
-	padding-left: 2%;
-	padding-right: 2%;
-}
-
-.flex-container {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-}
-
-.item {
-	display: flex;
-	align-items: flex-end;
-}
-
-.fontsize-text {
-	font-size: 1rem;
-}
-
-.fontsize-select-box {
-	font-size: 1rem;
+#fontsize-select-box {
+	font-size: 1.5rem;
 }
 
 #editor {
-    position: absolute;
-    top: 10%;
-    left: 52%;
-	width: 46%;
-	height: 50%;
+	height: 50vh;
+	border-radius: 3px;
 }
 
-#run {
-	position: absolute;
-	top: 60%;
-	left: 50%;
-	width: 46%;
-	height: 40%;
-	padding-left: 2%;
-	padding-right: 2%;
+#code-area {
+	max-height: 100vh;
+	overflow-y: scroll;
+}
+
+#code-area > div {
+	margin: 15px 0;
+}
+
+#code-area > .panel {
+	border: 1px solid #c5c3c6;
+	background-color: #0000;
+}
+
+#code-area .panel-body {
+    padding: 2px;
+}
+
+#input, #output {
+	resize: none;
+	width: 100%;
 }
