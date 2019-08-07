@@ -21,8 +21,8 @@ body {
 
 
 #info {
-    padding-left: 2%;
-    padding-right: 2%;
+    padding-left: 15px;
+    padding-right: 15px;
     height: 100vh;
     overflow-y: scroll;
 }
