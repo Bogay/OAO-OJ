@@ -18,38 +18,31 @@ function info() {
     });
 }
 
+function show_result(result) {
+    swal(
+        ... {
+            AC: ['Accepted!', 'Congrats!', 'success'],
+            WA: ['Wrong Answer!', 'OAQ!', 'error'],
+            LLE: ['Lines Limit Exceed!', 'OAO!', 'error'],
+        }[result]
+    )
+}
+
 function submit() {
     $("#result-modal").modal();
     $.post(url, { 'script': editor.getValue() }, function(data) {
-        $("#result").html(data['result']);
+        // $("#result").html(data['result']);
+        $('#result-modal').modal('hide');
+        show_result(data['result']);
     });
 }
 
 function test() {
-    $("#result-modal").modal();
+    $('#result-modal').modal();
     $.post(url, { 'input-data': $('#input').val(), 'output-data': $('#output').val(), 'script': editor.getValue() }, function(data) {
         // $("#result").html(data['result']);
-        if ( data['result'] === 'AC' ) {
-            swal(
-              'Accepted!',
-              'Congrats!',
-              'success'
-            );
-        }
-        else if ( data['result'] === 'WA' ) {
-            swal(
-              'Wrong Answer!',
-              'OAQ!',
-              'error'
-            );
-        }
-        else if ( data['result'] === 'LLE' ) {
-            swal(
-              'Lines Limit Exceed!',
-              'OAO!',
-              'error'
-            );
-        }
+        $('#result-modal').modal('hide');
+        show_result(data['result']);
     });
 }
 
