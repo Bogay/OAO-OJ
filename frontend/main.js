@@ -26,14 +26,14 @@ function test() {
 
 function rmnewline() {
     str = editor.getValue();
-    console.log('str befor: ' + str);
-    str = str.replace(/(\r\n|\r|\n)/g, ' ');
-    console.log('str after: ' + str);
+    // console.log('str befor: ' + str);
+    str = str.replace(/((\r\n|\r|\n)[ \t\n\r]*)+/g, '');
+    // console.log('str after: ' + str);
     editor.setValue(str);
 }
 
 function scale_font(o) {
     var fontsize = o.value + 'px';
-    console.log('o: ' + o);
+    // console.log('o: ' + o);
     $('#editor').css('fontSize', fontsize);
 }
