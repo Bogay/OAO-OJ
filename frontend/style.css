@@ -28,33 +28,56 @@ body {
 }
 
 #fontsize-select-box {
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 #editor {
-    height: 50vh;
-    border-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
 }
 
 #code-area {
-    max-height: 100vh;
-    overflow-y: scroll;
+    height: 100vh;
+    padding: 15px;
 }
 
-#code-area > div {
-    margin: 15px 0;
-}
-
-#code-area > .panel {
+#code-area > .card {
     border: 1px solid #c5c3c6;
     background-color: #0000;
+    height: 50%;
 }
 
-#code-area .panel-body {
+#code-area .card-body {
     padding: 2px;
+    height: 100%;
+}
+
+#run {
+    height: 50%;
+    padding-top: 15px;
+}
+
+#run > .nav-tabs {
+    border: none;
+}
+
+#run > .btn-group {
+    padding-top: 15px;
+}
+
+#run .nav-link {
+    background-color: rgba(0,0,0,.03);
+}
+
+#run .nav-link.active {
+    background-color: #fff;
 }
 
 #input, #output {
     resize: none;
+    border-color: #dee2e6;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
     width: 100%;
+    height: 100%;
 }
