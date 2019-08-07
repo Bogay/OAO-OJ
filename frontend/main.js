@@ -29,6 +29,11 @@ function test() {
     $("#result-modal").modal();
     $.post(url, { 'input-data': $('#input').val(), 'output-data': $('#output').val(), 'script': editor.getValue() }, function(data) {
         $("#result").html(data['result']);
+        swal(
+          'Accepted!',
+          'Congrats!',
+          'success'
+        );
     });
 }
 

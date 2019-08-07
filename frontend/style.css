@@ -24,7 +24,7 @@ body {
     padding-left: 2%;
     padding-right: 2%;
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 #fontsize-select-box {
