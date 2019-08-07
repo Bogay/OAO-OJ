@@ -18,6 +18,36 @@
 
 <body>
 <div class="container-fluid">
+    <!-- Rules -->
+    <div class="modal fade" id="rule-modal">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Rules</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body">
+                    <!-- Write Rules Here -->
+                    Some rules ...
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Result dialog -->
+    <div class="modal fade" id="result-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Result</h4>
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                <div class="modal-body" id="result">
+                    <div class="spinner-border"></div>
+                    Judging...
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div id="info" class="col-sm-6 info">
             <h1>Description</h1>
@@ -57,9 +87,10 @@
                     <textarea id="output" class="tab-pane" placeholder="Output"></textarea>
                 </div>
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary" onclick="rmnewline()">Fuck Line Break</button>
                     <button type="button" class="btn btn-primary" onclick="test()">Test</button>
                     <button type="button" class="btn btn-success" onclick="submit()">Submit</button>
+                    <button type="button" class="btn btn-dark" onclick="rmnewline()">Fuck Line Break</button>
+                    <button type="button" class="btn btn-dark" onclick="$('#rule-modal').modal();">Show Rules</button>
                 </div>
             </div>
         </div>

@@ -2,6 +2,12 @@ var editor;
 
 window.onload = () => {
     editor = ace.edit('editor');
+
+    $("#rule-modal").modal();
+
+    $("#result-modal").on('show.bs.modal', function () {
+        $("#result").html('<div class="spinner-border"></div>Judging...');
+    });
 };
 
 url = "http://oao-oj.herokuapp.com";
@@ -13,14 +19,16 @@ function info() {
 }
 
 function submit() {
+    $("#result-modal").modal();
     $.post(url, { 'script': editor.getValue() }, function(data) {
-        alert(data['result']);
+        $("#result").html(data['result']);
     });
 }
 
 function test() {
+    $("#result-modal").modal();
     $.post(url, { 'input-data': $('#input').val(), 'output-data': $('#output').val(), 'script': editor.getValue() }, function(data) {
-        alert(data['result']);
+        $("#result").html(data['result']);
     });
 }
 
