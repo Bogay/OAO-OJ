@@ -6,18 +6,12 @@ app = Flask(__name__)
 CORS(app)
 
 TMP_DIR = 'tmp'
-RES_DIR = 'res'
-TEST_DIR = f'{RES_DIR}/testdata'
+TEST_DIR = 'testdata'
 
 def readAll(name):
     with open(name, 'r') as f:
         ret = f.read()
     return ret
-
-
-@app.route('/', methods=['GET'])
-def index():
-    return readAll(f'{RES_DIR}/index.md')
 
 
 @app.route('/', methods=['POST'])
