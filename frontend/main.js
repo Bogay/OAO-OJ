@@ -10,10 +10,10 @@ window.onload = () => {
     });
 };
 
-url = "http://oao-oj.herokuapp.com";
+url = "http://localhost:8000/";
 
 function info() {
-    $.get(url, function(data) {
+    $.get('prob/index.md', function(data) {
         $("#info").html(marked(data));
     });
 }
