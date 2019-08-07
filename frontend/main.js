@@ -1,22 +1,30 @@
 var editor;
 
+const url = "http://localhost:8000/";
+
 window.onload = () => {
     editor = ace.edit('editor');
 
     $("#rule-modal").modal();
 
-    $("#result-modal").on('show.bs.modal', function () {
-        $("#result").html('<div class="spinner-border"></div>Judging...');
+    $("#result-modal").on('shown.bs.modal', (event) => {
+        let method = $(event.relatedTarget).data('method');
+
+        let payload = {
+            'script': editor.getValue(),
+        };
+
+        if(method === 'test') {
+            payload['input-data'] = $('#input').val();
+            payload['output-data'] = $('#output').val();
+        }
+
+        $.post(url, payload, function(data) {
+            $('#result-modal').modal('hide');
+            show_result(data['result']);
+        })
     });
 };
-
-url = "http://localhost:8000/";
-
-function info() {
-    $.get('prob/index.md', function(data) {
-        $("#info").html(marked(data));
-    });
-}
 
 function show_result(result) {
     swal(
@@ -28,21 +36,9 @@ function show_result(result) {
     )
 }
 
-function submit() {
-    $("#result-modal").modal();
-    $.post(url, { 'script': editor.getValue() }, function(data) {
-        // $("#result").html(data['result']);
-        $('#result-modal').modal('hide');
-        show_result(data['result']);
-    });
-}
-
-function test() {
-    $('#result-modal').modal();
-    $.post(url, { 'input-data': $('#input').val(), 'output-data': $('#output').val(), 'script': editor.getValue() }, function(data) {
-        // $("#result").html(data['result']);
-        $('#result-modal').modal('hide');
-        show_result(data['result']);
+function info() {
+    $.get('prob/index.md', function(data) {
+        $("#info").html(marked(data));
     });
 }
 
