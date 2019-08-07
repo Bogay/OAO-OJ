@@ -2,11 +2,15 @@
 
 ## Requirements
 
-- python2.7
+- python3.6
 
 ## Run
 
-`python -m SimpleHTTPServer 8080`
+### Linux/Mac
+`python3 -m http.server 8080`
+
+### Windows
+`python -m http.server 8080`
 
 ## TODO
 - [ ] clear textarea after refreshing

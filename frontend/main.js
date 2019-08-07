@@ -28,12 +28,28 @@ function submit() {
 function test() {
     $("#result-modal").modal();
     $.post(url, { 'input-data': $('#input').val(), 'output-data': $('#output').val(), 'script': editor.getValue() }, function(data) {
-        $("#result").html(data['result']);
-        swal(
-          'Accepted!',
-          'Congrats!',
-          'success'
-        );
+        // $("#result").html(data['result']);
+        if ( data['result'] === 'AC' ) {
+            swal(
+              'Accepted!',
+              'Congrats!',
+              'success'
+            );
+        }
+        else if ( data['result'] === 'WA' ) {
+            swal(
+              'Wrong Answer!',
+              'OAQ!',
+              'error'
+            );
+        }
+        else if ( data['result'] === 'LLE' ) {
+            swal(
+              'Lines Limit Exceed!',
+              'OAO!',
+              'error'
+            );
+        }
     });
 }
 
