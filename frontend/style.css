@@ -20,8 +20,8 @@ body {
 }
 
 #info {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 4vw;
+    padding-right: 4vw;
     height: 100vh;
     overflow-y: scroll;
 }
@@ -37,7 +37,7 @@ body {
 
 #code-area {
     height: 100vh;
-    padding: 15px;
+    padding: 2vw;
 }
 
 #code-area > .card {
@@ -51,9 +51,13 @@ body {
     height: 100%;
 }
 
+.btn {
+    width: 25%;
+}
+
 #run {
     height: 50%;
-    padding-top: 15px;
+    padding-top: 2vw;
 }
 
 #run > .nav-tabs {
@@ -61,7 +65,7 @@ body {
 }
 
 #run > .btn-group {
-    padding-top: 15px;
+    padding-top: 2vw;
 }
 
 #run .nav-link {

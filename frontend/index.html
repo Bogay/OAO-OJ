@@ -24,10 +24,10 @@
         <div class="modal-dialog modal-xl modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Rules</h4>
+                    <h3 class="modal-title">Welcome!</h3>
                     <button type="button" class="close" data-dismiss="modal">×</button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="rule">
                     <!-- Write Rules Here -->
                     Some rules ...
                 </div>
@@ -90,7 +90,7 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#result-modal" data-method="test">Test</button>
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#result-modal" data-method="submit">Submit</button>
-                    <button type="button" class="btn btn-dark" onclick="rmnewline()">Fuck Line Break</button>
+                    <button type="button" class="btn btn-secondary" onclick="rmnewline()">Fuck Line Break</button>
                     <button type="button" class="btn btn-dark" onclick="$('#rule-modal').modal();">Show Rules</button>
                 </div>
             </div>
@@ -104,8 +104,10 @@
     editor.setOptions({
         theme: 'ace/theme/monokai',
         printMargin: false,
-        fontSize: $('#fontsize-select').val(),
-    })
+        // fontSize: $('#fontsize-select').val(),
+        useWrapMode: true,
+        indentedSoftWrap: false,
+    });
 
     editor.session.setOptions({
         mode: 'ace/mode/python',
@@ -113,8 +115,11 @@
         useSoftTabs: true,
         tabSize: 4,
         wrap: true,
-    })
+    });
 
+    editor.setFontSize(Number($('#fontsize-select').val()));
+
+    rule();
     info();
 </script>
 

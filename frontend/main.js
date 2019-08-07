@@ -1,13 +1,13 @@
 var editor;
 
-const url = "http://localhost:8000/";
+const url = 'http://localhost:8000/';
 
 window.onload = () => {
     editor = ace.edit('editor');
 
-    $("#rule-modal").modal();
+    $('#rule-modal').modal();
 
-    $("#result-modal").on('shown.bs.modal', (event) => {
+    $('#result-modal').on('shown.bs.modal', (event) => {
         let method = $(event.relatedTarget).data('method');
 
         let payload = {
@@ -36,22 +36,25 @@ function show_result(result) {
     )
 }
 
+function rule() {
+    $.get('rule/main.md', function(data) {
+        $('#rule').html(marked(data));
+    });
+}
+
 function info() {
     $.get('prob/index.md', function(data) {
-        $("#info").html(marked(data));
+        $('#info').html(marked(data));
     });
 }
 
 function rmnewline() {
     str = editor.getValue();
-    // console.log('str befor: ' + str);
     str = str.replace(/((\r\n|\r|\n)[ \t\n\r]*)+/g, '');
-    // console.log('str after: ' + str);
     editor.setValue(str);
 }
 
 function scale_font(o) {
     var fontsize = o.value + 'px';
-    // console.log('o: ' + o);
-    $('#editor').css('fontSize', fontsize);
+    editor.setFontSize(fontsize);
 }
