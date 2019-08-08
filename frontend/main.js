@@ -15,8 +15,8 @@ window.onload = () => {
         };
 
         if(method === 'test') {
-            payload['input-data'] = $('#input').val();
-            payload['output-data'] = $('#output').val();
+            payload['input-data'] = $('#test-input').val();
+            payload['output-data'] = $('#test-output').val();
         }
 
         $.post(url, payload, function(data) {

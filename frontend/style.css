@@ -76,7 +76,7 @@ body {
     background-color: #fff;
 }
 
-#input, #output {
+#test-input, #test-output {
     resize: none;
     border-color: #dee2e6;
     border-bottom-left-radius: 3px;
