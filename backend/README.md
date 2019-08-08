@@ -15,8 +15,8 @@
 
 or
 
-`python3 -c "__import__('server').app.run(port='8000')"`
+`python3 -c "__import__('server').app.run(host='0.0.0.0', port='8000')"`
 
 ### Windows
 
-`python -c "__import__('server').app.run(port='8000')"`
+`python -c "__import__('server').app.run(host='0.0.0.0', port='8000')"`
