@@ -1,4 +1,4 @@
-OAO-OJ, an online judge only accept oneline script.
+OAO-OJ, an online judge that **O**nly **A**ccept **O**neline script.
 
 2019年的夏天，名為Ala的男人，僅用一行python code秒掉各種競賽題目
 

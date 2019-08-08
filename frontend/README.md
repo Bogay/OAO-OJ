@@ -14,6 +14,7 @@
 
 ## TODO
 - [ ] clear textarea after refreshing
-- [ ] style textarea
-- [ ] add information(rule) btn
-- [ ] add rule prompt
+- [x] style textarea
+- [x] add information(rule) btn
+- [x] add rule prompt
+- [ ] style scroll bar

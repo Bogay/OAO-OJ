@@ -4,13 +4,13 @@
 
 @font-face {
     font-family: custom;
-    src: local('Noto Serif TC');
+    src: local('Noto Serif TC'), local('Noto Sans TC');
     unicode-range: U+00-024F;
 }
 
 @font-face {
     font-family: custom;
-    src: local('Noto Sans TC');
+    src: local('Noto Serif TC'), local('Noto Sans TC');
     unicode-range: U+4E00-9FFF;
 }
 
