@@ -1,19 +1,28 @@
 # Simply Emirp
 
-[UVA - 10235](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=14&page=show_problem&problem=1176)
-
 ## Problem
 
 An integer greater than 1 is called a prime number if its only positive divisors (factors) are 1 and itself.
-Prime numbers have been studied over the years by a lot of mathematicians. Applications of prime
-numbers arise in Cryptography and Coding Theory among others.
-Have you tried reversing a prime? For most primes, you get a composite (43 becomes 34). An
-Emirp (Prime spelt backwards) is a Prime that gives you a different Prime when its digits are reversed.
+
+Prime numbers have been studied over the years by a lot of mathematicians.
+
+Applications of prime numbers arise in Cryptography and Coding Theory among others.
+
+Have you tried reversing a prime?
+
+For most primes, you get a composite (43 becomes 34). 
+
+An Emirp (Prime spelt backwards) is a Prime that gives you a different Prime when its digits are reversed.
+
 For example, 17 is Emirp because 17 as well as 71 are Prime.
-In this problem, you have to decide whether a number N is Non-prime or Prime or Emirp. Assume
-that 1 < N < 1000000.
-Interestingly, Emirps are not new to NTU students. We have been boarding 199 and 179 buses for
-quite a long time!
+
+In this problem, you have to decide whether a number N is Non-prime or Prime or Emirp.
+
+Assume that 1 < N < 1000000.
+
+Interestingly, Emirps are not new to NTU students.
+
+We have been boarding 199 and 179 buses for quite a long time!
 
 ## Input
 
@@ -45,3 +54,7 @@ For each N given in the input, output should contain one of the following:
 179 is emirp.
 199 is emirp.
 ```
+
+## Source
+
+[UVa - 10235](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=14&page=show_problem&problem=1176)
