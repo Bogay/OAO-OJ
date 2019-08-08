@@ -119,6 +119,10 @@
 
     editor.setFontSize(Number($('#fontsize-select').val()));
 
+    marked.setOptions({
+        breaks: true,
+    });
+
     rule();
     info();
 </script>
