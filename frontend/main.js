@@ -1,6 +1,8 @@
 var editor;
 
-const url = 'http://localhost:8000/';
+// const url = 'http://localhost:8000/';
+const API_PORT = ':8000';
+const API_BASE_URL = location.origin.replace(/:\d+/g, API_PORT);
 
 window.onload = () => {
     editor = ace.edit('editor');
@@ -19,7 +21,7 @@ window.onload = () => {
             payload['output-data'] = $('#test-output').val();
         }
 
-        $.post(url, payload, function(data) {
+        $.post(API_BASE_URL, payload, function(data) {
             $('#result-modal').modal('hide');
             show_result(data['result']);
         })

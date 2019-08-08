@@ -4,17 +4,19 @@
 
 - Python3.6
 - Flask
+- gunicorn (Optional)
 - flask-cors
-- gunicorn (optional)
 
-## run with gunicorn
-
-`gunicorn server:app`
-
-## run server without gunicorn
+## Run
 
 ### Linux/Mac
-`python3 -c "__import__('server').app.run(port='8000')"`
+
+`gunicorn -b 0.0.0.0:8000 server:app`
+
+or
+
+`python3 -c "__import__('server').app.run(host='0.0.0.0', port='8000')"`
 
 ### Windows
-`python -c "__import__('server').app.run(port='8000')"`
+
+`python -c "__import__('server').app.run(host='0.0.0.0', port='8000')"`
