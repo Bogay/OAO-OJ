@@ -22,8 +22,10 @@
 - [x] add rule prompt
 - [x] style scroll bar
 - [ ] rule overflow
+- [ ] 
+- [ ] registeration page
 
-## option
+## option nav
 
 - [ ] setting(fontsize, theme)
 - [ ] editor shortcut
