@@ -20,3 +20,8 @@ or
 ### Windows
 
 `python -c "__import__('server').app.run(host='0.0.0.0', port='8000')"`
+
+## TODO
+
+- [ ] account system
+- [ ] support multi-testcase
