@@ -22,7 +22,8 @@
 - [x] add rule prompt
 - [x] style scroll bar
 - [ ] rule overflow
-- [ ] 
+- [ ] problem set page
+- [ ] bootstrap col not work in chrome
 - [ ] registeration page
 
 ## option nav
