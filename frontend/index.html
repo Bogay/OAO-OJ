@@ -25,7 +25,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title">Welcome to OAO-OJ!</h3>
-                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body" id="rule">
                     <!-- Write Rules Here -->
@@ -40,7 +40,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Result</h4>
-                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body" id="result">
                     <div class="spinner-border"></div>
@@ -50,8 +50,23 @@
         </div>
     </div>
     <div class="row">
-        <div id="info" class="col-sm-6 info">
-            <h1>Description</h1>
+        <div id="info-area" class="col-sm-6 d-flex flex-column">
+            <ul id="info-nav" class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#info">Description</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#submission">Submission</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#discussion">Discussion</a></li>
+            </ul>
+            <div id="info-content" class="tab-content flex-grow-1">
+                <div id="info" class="tab-pane active">
+                    <h1>Description</h1>
+                </div>
+                <div id="submission" class="tab-pane">
+                    <h1>Submission</h1>
+                </div>
+                <div id="discussion" class="tab-pane">
+                    <h1>Discussion</h1>
+                </div>
+            </div>
         </div>
 
         <div id="code-area" class="col-sm-6">
@@ -59,7 +74,7 @@
                 <!-- Editor Style Setting -->
                 <div id="fontsize-select-box" class="card-header">
                     FontSize: 
-                    <select id="fontsize-select" onchange="scale_font(this);">
+                    <select id="fontsize-select" class="form-control-sm" onchange="scale_font(this);">
                         <option value="8">8</option>
                         <option value="9">9</option>
                         <option value="10">10</option>
