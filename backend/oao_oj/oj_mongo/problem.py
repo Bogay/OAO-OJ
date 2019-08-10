@@ -1,9 +1,6 @@
-
 import pymongo
-import sys, os
-sys.path.append(os.path.abspath(os.path.join('..', 'config')))
 
-from config import *
+from oao_oj.config import *
 from flask import jsonify
 
 mongo_client = pymongo.MongoClient('mongodb://localhost:27017/')
