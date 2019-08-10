@@ -29,9 +29,11 @@ or
 
 ## DB Preset
 
-`use OAO-OJ`
-`db.createCollection('problems')`
-`db.problems.insertOne({'pid': '0000', 'title': 'Hello, OAO-OJ'})`
+```
+use OAO-OJ
+db.createCollection('problems')
+db.problems.insertOne({'pid': '0001', 'title': 'Hello, OAO-OJ'})
+```
 
 ## TODO
 
