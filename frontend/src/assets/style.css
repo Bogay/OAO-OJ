@@ -72,7 +72,7 @@ h1 {
 
 .btn {
     width: 25%;
-    font-size: 1.5vw;
+    font-size: 1vw;
 }
 
 .modal-title {
@@ -98,6 +98,16 @@ h1 {
 
 #run .nav-link.active {
     background-color: #fff;
+}
+
+#info-area .nav-link {
+    background-color: #fff;
+    border-bottom-color: #dee2e6;
+}
+
+#info-area .nav-link.active {
+    background-color: transparent;
+    border-bottom-color: #f5f2f0;
 }
 
 #test-input, #test-output {

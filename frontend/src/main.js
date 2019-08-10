@@ -39,7 +39,7 @@ function show_result(result) {
 }
 
 function rule() {
-    $.get('rule/main.md', function(data) {
+    $.get('../rule.md', function(data) {
         $('#rule').html(marked(data));
     });
 }
