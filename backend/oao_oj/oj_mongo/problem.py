@@ -1,7 +1,7 @@
 import pymongo
 
-# constants for db
-PROB_COL = 'problems'
+from oao_oj.config import *
+from flask import jsonify
 
 mongo_client = pymongo.MongoClient('mongodb://localhost:27017/')
 oj_db = mongo_client['OAO-OJ']
@@ -18,6 +18,7 @@ def update_problem(pid, data):
 def get_all_problems():
     ps_col = oj_db[PROB_COL]
     ps = [*ps_col.find({}, {'_id': 0, 'pid': 1, 'title': 1})]
+    ps = [[p['pid'], p['title'], 0, 0] for p in ps]
 
     return jsonify(ps), 200
 
@@ -33,7 +34,7 @@ def get_problem(pid):
     try:
         with open(f'{PROB_DIR}/{pid}/prob.md') as f:
             desc = f.read()
-    except e:
+    except:
         return jsonify({'msg': f'error when reading problem\'s content!'}), 404
 
     prob = {

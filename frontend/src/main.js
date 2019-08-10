@@ -45,8 +45,8 @@ function rule() {
 }
 
 function info() {
-    $.get('prob/index.md', function(data) {
-        $('#info').html(marked(data));
+    $.get(`${API_BASE_URL}/problems/0000`, function(data) {
+        $('#info').html(marked(data.desc));
     });
 }
 
