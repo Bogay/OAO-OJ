@@ -5,11 +5,6 @@ from flask_cors import CORS
 
 from oj_mongo import update_problem, get_all_problems, get_problem, add_problem
 
-# constants for path
-TMP_DIR = 'tmp'
-PROB_DIR = 'prob'
-TEST_DIR = 'testdatas'
-
 app = Flask(__name__)
 CORS(app)
 

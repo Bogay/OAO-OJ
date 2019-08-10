@@ -1,1 +1,1 @@
-from problems import *
+from .problem import *

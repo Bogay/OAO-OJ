@@ -1,7 +1,10 @@
-import pymongo
 
-# constants for db
-PROB_COL = 'problems'
+import pymongo
+import sys, os
+sys.path.append(os.path.abspath(os.path.join('..', 'config')))
+
+from config import *
+from flask import jsonify
 
 mongo_client = pymongo.MongoClient('mongodb://localhost:27017/')
 oj_db = mongo_client['OAO-OJ']
@@ -33,7 +36,7 @@ def get_problem(pid):
     try:
         with open(f'{PROB_DIR}/{pid}/prob.md') as f:
             desc = f.read()
-    except e:
+    except:
         return jsonify({'msg': f'error when reading problem\'s content!'}), 404
 
     prob = {

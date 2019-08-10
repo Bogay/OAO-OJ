@@ -6,6 +6,8 @@
 - Flask
 - gunicorn (Optional)
 - flask-cors
+- pymongo
+- mongodb
 
 ## Run
 
