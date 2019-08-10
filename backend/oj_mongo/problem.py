@@ -21,6 +21,7 @@ def update_problem(pid, data):
 def get_all_problems():
     ps_col = oj_db[PROB_COL]
     ps = [*ps_col.find({}, {'_id': 0, 'pid': 1, 'title': 1})]
+    ps = [[p['pid'], p['title'], 0, 0] for p in ps]
 
     return jsonify(ps), 200
 
