@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>[prob.name]</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel=stylesheet type="text/css" href="../assetsmarkdownstyle.css">
+    <link rel=stylesheet type="text/css" href="../assets/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="../ace-builds/src-noconflict/ace.js" type="text/javascript"></script>
+    <script src="main.js" type="text/javascript"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <!-- Rules -->
+    <div class="modal fade" id="rule-modal">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title">Welcome to OAO-OJ!</h3>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="rule">
+                    <!-- Write Rules Here -->
+                    Some rules ...
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Result dialog (now replace with swal)-->
+    <div class="modal fade" id="result-modal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Result</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" id="result">
+                    <div class="spinner-border"></div>
+                    Judging...
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="info-area" class="col-sm-6 d-flex flex-column">
+            <ul id="info-nav" class="nav nav-tabs">
+                <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#info">Description</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#submission">Submission</a></li>
+                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#discussion">Discussion</a></li>
+            </ul>
+            <div id="info-content" class="tab-content flex-grow-1">
+                <div id="info" class="tab-pane active">
+                    <h1>Description</h1>
+                </div>
+                <div id="submission" class="tab-pane">
+                    <h1>Submission</h1>
+                </div>
+                <div id="discussion" class="tab-pane">
+                    <h1>Discussion</h1>
+                </div>
+            </div>
+        </div>
+
+        <div id="code-area" class="col-sm-6">
+            <div class="card">
+                <!-- Editor Style Setting -->
+                <div id="fontsize-select-box" class="card-header">
+                    FontSize: 
+                    <select id="fontsize-select" class="form-control-sm" onchange="scale_font(this);">
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12" selected="selected">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="16">16</option>
+                        <option value="18">18</option>
+                        <option value="24">24</option>
+                        <option value="36">36</option>
+                        <option value="48">48</option>
+                    </select>
+                </div>
+                <div class="card-body d-flex">
+                    <div id="editor" class="editor flex-grow-1"></div>
+                </div>
+            </div>
+            <div id="run" class="d-flex flex-column">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#test-input">Input</a></li>
+                    <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#test-output">Output</a></li>
+                </ul>
+                <div class="tab-content flex-grow-1">
+                    <textarea id="test-input" class="tab-pane active" placeholder="Input"></textarea>
+                    <textarea id="test-output" class="tab-pane" placeholder="Output"></textarea>
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#result-modal" data-method="test">Test</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#result-modal" data-method="submit">Submit</button>
+                    <button type="button" class="btn btn-secondary" onclick="rmnewline()">Fuck Line Break</button>
+                    <button type="button" class="btn btn-dark" onclick="$('#rule-modal').modal();">Show Rules</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var editor = ace.edit('editor');
+
+    editor.setOptions({
+        theme: 'ace/theme/monokai',
+        printMargin: false,
+        // fontSize: $('#fontsize-select').val(),
+        useWrapMode: true,
+        indentedSoftWrap: false,
+    });
+
+    editor.session.setOptions({
+        mode: 'ace/mode/python',
+        newLineMode: 'unix',
+        useSoftTabs: true,
+        tabSize: 4,
+        wrap: true,
+    });
+
+    editor.setFontSize(Number($('#fontsize-select').val()));
+
+    marked.setOptions({
+        breaks: true,
+    });
+
+    rule();
+    info();
+</script>
+
+</body>
+
+</html>
