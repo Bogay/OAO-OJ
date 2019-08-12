@@ -54,11 +54,7 @@ exports.cssLoaders = function (options) {
     }
   }
 
-  // global scss setting
-  function resolveResource(name) {
-    return path.resolve(__dirname, '../src/styles/global/' + name);
-  }
-
+  // global sass setting
   function generateSassResourceLoader() {
     var loaders = [
     cssLoader,
@@ -66,18 +62,14 @@ exports.cssLoaders = function (options) {
     {
       loader: 'sass-resources-loader',
       options: {
-      resources: [
-        resolveResource('_mixins.scss'),
-        resolveResource('_variables.scss'),
-        resolveResource('_normalize.scss')
-      ]
+        resources: path.resolve(__dirname, '../src/styles/global/_mixin.scss')
       }
     }
     ];
     if (options.extract) {
       return ExtractTextPlugin.extract({
-      use: loaders,
-      fallback: 'vue-style-loader'
+        use: loaders,
+        fallback: 'vue-style-loader'
       })
     } else {
       return ['vue-style-loader'].concat(loaders)

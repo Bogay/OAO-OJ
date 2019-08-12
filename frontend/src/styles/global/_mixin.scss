@@ -1,0 +1,32 @@
+@font-face {
+  font-family: mainSerif;
+  src: url('/src/assets/IBMPlexSerif-Regular.otf')
+}
+
+@font-face {
+  font-family: Noto;
+  src: url('/src/assets/NotoSerifTC-Regular.otf'),
+  		 url('/src/assets/NotoSansTC-Regular.otf');
+}
+
+$bg-color: #f5f2f0;
+
+body {
+  font-family: mainSerif, Noto;
+  background-color: $bg-color;
+}
+
+::-webkit-scrollbar {
+  width: 0.5vw;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  background: rgb(219,219,219);
+}

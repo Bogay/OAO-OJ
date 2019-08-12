@@ -52,6 +52,13 @@ module.exports = {
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {
+        test: /\.(sass|scss)$/,
+        loader: 'sass-loader',
+        options: {
+          resources: path.resolve(__dirname, '../src/styles/global/_mixin.scss')
+        }
+      },
+      {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
         loader: 'url-loader',
         options: {
