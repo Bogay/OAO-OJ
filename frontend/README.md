@@ -1,33 +1,27 @@
-# OAO-OJ Frontend
+# frontend
 
-## Requirements
+> OAO-OJ frontend by Vue.js
 
-- python3.6
+## Build Setup
 
-## Run
+``` bash
+# install dependencies
+npm install
 
-### Linux/Mac
+# serve with hot reload at localhost:8080
+npm run dev
 
-`python3 -m http.server 8080`
+# build for production with minification
+npm run build
 
-### Windows
+# build for production and view the bundle analyzer report
+npm run build --report
 
-`python -m http.server 8080`
+# run unit tests
+npm run unit
 
-## TODO
+# run all tests
+npm test
+```
 
-- [ ] clear textarea after refreshing
-- [x] style textarea
-- [x] add information(rule) btn
-- [x] add rule prompt
-- [x] style scroll bar
-- [ ] rule overflow
-- [ ] problem set page
-- [ ] bootstrap col not work in chrome
-- [ ] registeration page
-
-## option nav
-
-- [ ] setting(fontsize, theme)
-- [ ] editor shortcut
-- [ ] full screen
+For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
