@@ -20,7 +20,8 @@ an online judge that **O**nly **A**ccept **O**neline script.
 2. Submission result
 	- **Accepted**: Your output is correct.
 	- **Wrong Answer**: Your output is not correct.
-	- **Line Limit Exceeded**: Your source code is more than one line(contains `'\n'`, `'\r'`, `';'`)
+	- **Line Limit Exceeded**: Your source code is more than one line
+	(contains `'\n'`, `'\r'`, `';'`)
 
 
 3. Good Luck & Have Fun!
