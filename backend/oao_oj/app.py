@@ -18,7 +18,7 @@ def readAll(name):
 
 
 @app.route('/problems', methods=['GET'])
-@app.route('/problems/<pid>', methods=['GET', 'POST', 'PUT'])
+@app.route('/problem/<pid>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def problem_entry(pid=None):
     if not pid:
         return get_all_problems()
@@ -44,6 +44,13 @@ def problem_entry(pid=None):
         data = request.values
 
         return Problem(pid).update(data)
+
+    elif method == 'DELETE':
+        count = Problem(pid).delete()
+        if not count:
+            return jsonify({'err': 'Problem not exists.'}), 404
+
+        return jsonify({'msg': 'Ok.'})
 
 
 @app.route('/accounts', methods=['GET', 'POST', 'PUT'])

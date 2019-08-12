@@ -4,7 +4,7 @@ import os
 from oao_oj.config import PROB_COL, PROB_DIR
 from json import loads as json_loads
 from flask import jsonify
-from typing import Optional
+from shutil import rmtree
 
 CLIENT = pymongo.MongoClient('mongodb://localhost:27017/')
 DB = CLIENT['OAO-OJ']
@@ -106,9 +106,18 @@ class Problem():
 
 
     def update(self, data):
-        '''A method for updating the problem
-        '''
+        '''A method for updating the problem'''
         return 'El psy congroo'
+
+
+    def delete(self):
+        '''A method for deleting the problem'''
+        count = COLL.delete_one({'pid': self.pid}).deleted_count
+
+        if count:
+            rmtree(f'{PROB_DIR}/{self.pid}', ignore_errors=True)
+
+        return count
 
 
 def get_all_problems():
