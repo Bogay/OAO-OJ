@@ -10,7 +10,7 @@ Description: Github README style. Includes theme for Pygmentized code blocks.
 
 @font-face {
   font-family: "Monaco";
-  src: url("/src/assets/monaco.ttf") format("truetype");
+  src: url("/static/fonts/monaco.ttf") format("truetype");
 }
 
 html, body {
