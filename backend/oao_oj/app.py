@@ -5,7 +5,7 @@ import json
 from flask import Flask, request, render_template, jsonify, Response
 from flask_cors import CORS
 
-from oao_oj.oj_mongo import update_problem, get_all_problems, get_problem, add_problem
+from oao_oj.mongo import Problem, get_all_problems
 from oao_oj.config import *
 
 app = Flask(__name__)
@@ -19,16 +19,31 @@ def readAll(name):
 
 @app.route('/problems', methods=['GET'])
 @app.route('/problems/<pid>', methods=['GET', 'POST', 'PUT'])
-def problem_entry(pid = None):
-    if request.method == 'GET':
-        if pid:
-            return get_problem(pid)
-        else:
-            return get_all_problems()
-    elif request.method == 'POST':
-        return update_problem(pid, request.value)
-    elif request.method == 'PUT':
-        return add_problem(pid)
+def problem_entry(pid=None):
+    if not pid:
+        return get_all_problems()
+
+    method = request.method
+
+    if method == 'GET':
+        json = Problem(pid).json
+        if not json:
+            return jsonify({'err': 'Problem not exists.'}), 404
+
+        return json
+
+    elif method == 'POST':
+        data = request.values
+        prob = Problem.add(pid, data)
+        if not prob:
+            return jsonify({'err': 'Problem exists.'}), 400
+
+        return jsonify({'msg': 'Ok.'})
+
+    elif method == 'PUT':
+        data = request.values
+
+        return Problem(pid).update(data)
 
 
 @app.route('/accounts', methods=['GET', 'POST', 'PUT'])
