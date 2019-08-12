@@ -128,6 +128,11 @@ def get_all_problems():
 
     '''
     ps = [*COLL.find({}, {'_id': 0, 'pid': 1, 'title': 1})]
-    json = jsonify([[p['pid'], p['title'], 0, 0] for p in ps])
+    json = jsonify([{
+        'pid': p['pid'], 
+        'title': p['title'], 
+        'status':0,
+        'ac': 0
+    } for p in ps])
 
     return json
