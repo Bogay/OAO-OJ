@@ -5,7 +5,7 @@
 
 <script>
 export default {
-  name: 'Probset',
+  name: 'Discuss',
   data () {
     return {
 

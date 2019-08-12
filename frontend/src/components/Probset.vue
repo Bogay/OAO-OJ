@@ -13,13 +13,14 @@ export default {
   name: 'Probset',
   data () {
     return {
-      fields: [
-        { key: 'Id', tdClass: 'col-1' },
-        { key: 'Name', tdClass: 'col-5' },
-        { key: 'Status', tdClass: 'col-2' },
-        { key: 'Submissions AC%', tdClass: 'col-2' },
-        { key: 'Users AC%', tdClass: 'col-2' }
-      ],
+      fields: ['Id', 'Name', 'Status', 'Submissions AC%', 'Users AC%'],
+      // fields: [
+      //   { key: 'Id', tdClass: 'col-1' },
+      //   { key: 'Name', tdClass: 'col-5' },
+      //   { key: 'Status', tdClass: 'col-2' },
+      //   { key: 'Submissions AC%', tdClass: 'col-2' },
+      //   { key: 'Users AC%', tdClass: 'col-2' }
+      // ],
       items: []
     }
   },
@@ -28,19 +29,20 @@ export default {
       .then((response) => {
         let data = response.data
         data.forEach(el => {
-          let val = el[2]
+          console.log(el)
+          let val = el['Status']
           switch (val) {
             case 1:
-              el[2] = 'AC'
+              el['Status'] = 'AC'
               break
             case 2:
-              el[2] = 'WA'
+              el['Status'] = 'WA'
               break
             case 3:
-              el[2] = 'LLE'
+              el['Status'] = 'LLE'
               break
             default:
-              el[2] = 'none'
+              el['Status'] = 'Todo'
           }
         })
         this.items = response.data

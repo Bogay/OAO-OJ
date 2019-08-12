@@ -2,6 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Probset from '@/components/Probset'
+import Submissions from '@/components/Submissions'
+import Contests from '@/components/Contests'
+import Discuss from '@/components/Discuss'
+import About from '@/components/About'
+import Manage from '@/components/Manage'
 
 Vue.use(Router)
 
@@ -19,23 +24,28 @@ export default new Router({
     },
     {
       path: '/submissions',
-      name: 'Submissions'
+      name: 'Submissions',
+      component: Submissions
     },
     {
       path: '/contests',
-      name: 'Contests'
+      name: 'Contests',
+      component: Contests
     },
     {
       path: '/discuss',
-      name: 'Discuss'
+      name: 'Discuss',
+      component: Discuss
     },
     {
       path: '/about',
-      name: 'About'
+      name: 'About',
+      component: About
     },
     {
       path: '/manage',
-      name: 'Manage'
+      name: 'Manage',
+      component: Manage
     }
   ]
 })
