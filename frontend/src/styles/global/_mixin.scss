@@ -1,18 +1,14 @@
 @font-face {
-  font-family: mainSerif;
-  src: url('/src/assets/IBMPlexSerif-Regular.otf')
-}
-
-@font-face {
-  font-family: Noto;
-  src: url('/src/assets/NotoSerifTC-Regular.otf'),
-  		 url('/src/assets/NotoSansTC-Regular.otf');
+  font-family: 'custom';
+  src: url('/src/assets/IBMPlexSerif-Regular.ttf') format("truetype"), 
+       url('/src/assets/NotoSerifTC-Regular.otf'), 
+       url('/src/assets/NotoSansTC-Regular.otf');
 }
 
 $bg-color: #f5f2f0;
 
 body {
-  font-family: mainSerif, Noto;
+  font-family: custom;
   background-color: $bg-color;
 }
 

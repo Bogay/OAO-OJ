@@ -16,4 +16,8 @@ export default {
 </script>
 
 <style lang="scss">
+
+@import "./styles/global/_mixin.scss";
+@import "./styles/global/markdownstyle.css";
+
 </style>

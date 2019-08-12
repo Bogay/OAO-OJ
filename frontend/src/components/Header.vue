@@ -5,12 +5,13 @@
     <b-navbar-toggle target="nav-collapse" ></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item href="/">Home</b-nav-item>
-        <b-nav-item href="/Problems">Problems</b-nav-item>
-        <b-nav-item href="#">Submissions</b-nav-item>
-        <b-nav-item href="#">Contests</b-nav-item>
-        <b-nav-item href="#">Discuss</b-nav-item>
-        <b-nav-item href="/About">About</b-nav-item>
+        <b-nav-item><router-link to="/">Home</router-link></b-nav-item>
+        <b-nav-item><router-link to="/problemset">Problems</router-link></b-nav-item>
+        <b-nav-item><router-link to="/submissions">Submissions</router-link></b-nav-item>
+        <b-nav-item><router-link to="/contests">Contests</router-link></b-nav-item>
+        <b-nav-item><router-link to="/discuss">Discuss</router-link></b-nav-item>
+        <b-nav-item><router-link to="/about">About</router-link></b-nav-item>
+        <b-nav-item><router-link to="/manage">Manage</router-link></b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -23,8 +24,8 @@
         <b-nav-item-dropdown right>
           <!-- Using 'button-content' slot -->
           <template slot="button-content">User</template>
-          <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+          <b-dropdown-item>Profile</b-dropdown-item>
+          <b-dropdown-item>Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>
@@ -39,6 +40,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+.nav-bar {
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+}
 
 .navbar-brand {
   color: #2a2f35;
