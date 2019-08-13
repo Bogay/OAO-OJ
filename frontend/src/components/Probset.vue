@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-table striped hover :items="items" :fields="fields">
+    <b-table borderless striped hover :items="items" :fields="fields">
     </b-table>
   </div>
 </template>

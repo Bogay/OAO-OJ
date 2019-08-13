@@ -15,7 +15,7 @@ export default {
   name: 'Dashboard',
   data () {
     return {
-      message: 'say something'
+      message: 'Am I cute?'
     }
   }
 }
