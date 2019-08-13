@@ -4,7 +4,6 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import axios from 'axios'
-// import VueAxios from 'vue-axios'
 
 // register bootstrap4 and import bootstrap css file
 import BootstrapVue from 'bootstrap-vue'

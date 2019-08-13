@@ -5,13 +5,11 @@
     <b-navbar-toggle target="nav-collapse" ></b-navbar-toggle>
     <b-collapse id="nav-collapse" is-nav>
       <b-navbar-nav>
-        <b-nav-item><router-link to="/">Home</router-link></b-nav-item>
-        <b-nav-item><router-link to="/problemset">Problems</router-link></b-nav-item>
-        <b-nav-item><router-link to="/submissions">Submissions</router-link></b-nav-item>
-        <b-nav-item><router-link to="/contests">Contests</router-link></b-nav-item>
-        <b-nav-item><router-link to="/discuss">Discuss</router-link></b-nav-item>
-        <b-nav-item><router-link to="/about">About</router-link></b-nav-item>
-        <b-nav-item><router-link to="/manage">Manage</router-link></b-nav-item>
+        <b-nav-item v-for="item in data" :key="item.name">
+          <router-link :to="{ path: item.path }">
+            {{ item.name }}
+          </router-link>
+        </b-nav-item>
       </b-navbar-nav>
 
       <!-- Right aligned nav items -->
@@ -33,8 +31,22 @@
 </template>
 
 <script>
+var items = [
+  { path: '/', name: 'Home' },
+  { path: '/problemset', name: 'Problems' },
+  { path: '/submissions', name: 'Submissions' },
+  { path: '/contests', name: 'Contests' },
+  { path: '/discuss', name: 'Discuss' },
+  { path: '/about', name: 'About' },
+  { path: '/manage', name: 'Manage' }
+]
 export default {
-  name: 'Header'
+  name: 'Header',
+  data () {
+    return {
+      data: items
+    }
+  }
 }
 </script>
 
