@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'Dashboard',
+  name: 'Problems',
   data () {
     return {
       message: 'say something'

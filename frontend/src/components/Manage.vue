@@ -1,28 +1,27 @@
 <template>
-  <div class="container block">
-    <b-tabs content-class="mt-3" justified pills vertical>
-      <b-tab title="Dashboard" active>
-        <DashBoard></DashBoard>
-      </b-tab>
-      <b-tab title="Problems"></b-tab>
-      <b-tab title="Contests"></b-tab>
-      <b-tab title="Account"></b-tab>
-      <b-tab title="Bulletin"></b-tab>
-      <b-tab title="Question"></b-tab>
+  <b-card no-body>
+    <b-tabs card pills vertical>
+      <b-tab v-for="component in componentNames" :title=component :key="component"><component  v-bind:is="component"></component></b-tab>
     </b-tabs>
-  </div>
+  </b-card>
 </template>
 
 <script>
 import Dashboard from './ManageItem/Dashboard'
+import Problems from './ManageItem/Problems'
+import Contests from './ManageItem/Contests'
+import Account from './ManageItem/Account'
+import Bulletin from './ManageItem/Bulletin'
+import Question from './ManageItem/Question'
+
 export default {
   name: 'Manage',
-  component: {
-    'Dashboard': Dashboard
+  components: {
+    Dashboard, Problems, Contests, Account, Bulletin, Question
   },
   data () {
     return {
-      message: 'h3'
+      componentNames: ['Dashboard', 'Problems', 'Contests', 'Account', 'Bulletin', 'Question']
     }
   }
 }
