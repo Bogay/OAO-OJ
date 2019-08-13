@@ -7,8 +7,10 @@ from flask_cors import CORS
 
 from oao_oj.mongo import Problem, get_all_problems
 from oao_oj.config import *
+from oao_oj.admin import admin_page
 
 app = Flask(__name__)
+app.register_blueprint(admin_page, url_prefix='/admin')
 CORS(app)
 
 def readAll(name):

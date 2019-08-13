@@ -131,7 +131,7 @@ def get_all_problems():
     json = jsonify([{
         'Id': p['pid'], 
         'Name': p['title'], 
-        'Status':0,
+        'Status': 0,
         'Submissions AC%': 0,
         'Users AC%': 0
     } for p in ps])
