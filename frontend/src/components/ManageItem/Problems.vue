@@ -1,17 +1,24 @@
 <template>
-  <div class="container">
-    <b-table head-variant="dark" borderless striped hover :items="items" :fields="fields">
-      <template v-for="field in fields" :slot="field.key" slot-scope="data">
-        <div v-if="field.colType==='text'" :key="field.key">
-          {{ data.item[field.key] }}
-        </div>
-        <div v-else :key="field.key">
-          <b-button variant="primary" size="sm">
-            Edit
-          </b-button>
-        </div>
-      </template>
-    </b-table>
+  <div>
+    <b-collapse id="prob-detail">
+      <b-card>
+        <h2>ha, 想編輯題目? 自己來做啦哈哈哈哈哈哈哈哈嗚嗚嗚嗚嗚</h2>
+      </b-card>
+    </b-collapse>
+    <div class="container">
+      <b-table head-variant="dark" borderless striped hover :items="items" :fields="fields">
+        <template v-for="field in fields" :slot="field.key" slot-scope="data">
+          <div v-if="field.colType==='text'" :key="field.key">
+            {{ data.item[field.key] }}
+          </div>
+          <div v-else :key="field.key">
+            <b-button variant="primary" size="sm" v-b-toggle.prob-detail>
+              Edit
+            </b-button>
+          </div>
+        </template>
+      </b-table>
+    </div>
   </div>
 </template>
 
