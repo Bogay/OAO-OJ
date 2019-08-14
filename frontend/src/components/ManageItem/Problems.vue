@@ -1,10 +1,15 @@
 <template>
   <div class="container">
     <b-table head-variant="dark" borderless striped hover :items="items" :fields="fields">
-      <template>
-        <b-button variant="primary" size="sm">
-          Edit
-        </b-button>
+      <template v-for="field in fields" :slot="field.key" slot-scope="data">
+        <div v-if="field.colType==='text'" :key="field.key">
+          {{ data.item[field.key] }}
+        </div>
+        <div v-else :key="field.key">
+          <b-button variant="primary" size="sm">
+            Edit
+          </b-button>
+        </div>
       </template>
     </b-table>
   </div>
@@ -18,7 +23,12 @@ export default {
   name: 'Problems',
   data () {
     return {
-      fields: ['Id', 'Name', 'Status', 'Edit'],
+      fields: [
+        {key: 'Id', label: 'Id', colType: 'text'},
+        {key: 'Name', label: 'Name', colType: 'text'},
+        {key: 'Status', label: 'Status', colType: 'text'},
+        {key: 'Edit', label: 'Edit', colType: 'button'}
+      ],
       items: []
     }
   },
