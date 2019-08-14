@@ -23,7 +23,16 @@ def readAll(name):
 @app.route('/problem/<pid>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def problem_entry(pid=None):
     if not pid:
-        return get_all_problems()
+        probs = get_all_problems()
+        probs = [{
+            'Id': p['pid'], 
+            'Name': p['title'], 
+            'Status': 0,
+            'Submissions AC%': 0,
+            'Users AC%': 0
+        } for p in probs]
+
+        return jsonify(probs)
 
     method = request.method
 
