@@ -38,7 +38,7 @@ class Problem():
         '''
         prob = cls(pid)
 
-        if prob.json:
+        if prob.detail:
             return None
 
         # Insert the problem to DB
