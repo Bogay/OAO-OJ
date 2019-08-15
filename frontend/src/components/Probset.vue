@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <b-table borderless striped hover :items="items" :fields="fields">
+    <b-table borderless striped hover :items="items" :fields="fields" :tbody-tr-class="'d-flex'" :thead-tr-class="'d-flex'">
     </b-table>
   </div>
 </template>
@@ -13,14 +13,14 @@ export default {
   name: 'Probset',
   data () {
     return {
-      fields: ['Id', 'Name', 'Status', 'Submissions AC%', 'Users AC%'],
-      // fields: [
-      //   { key: 'Id', tdClass: 'col-1' },
-      //   { key: 'Name', tdClass: 'col-5' },
-      //   { key: 'Status', tdClass: 'col-2' },
-      //   { key: 'Submissions AC%', tdClass: 'col-2' },
-      //   { key: 'Users AC%', tdClass: 'col-2' }
-      // ],
+      // fields: ['Id', 'Name', 'Status', 'Submissions AC%', 'Users AC%'],
+      fields: [
+        { key: 'Id', thClass: 'col-1', tdClass: 'col-1' },
+        { key: 'Name', thClass: 'col-5', tdClass: 'col-5' },
+        { key: 'Status', thClass: 'col-2', tdClass: 'col-2' },
+        { key: 'Submissions AC%', thClass: 'col-2', tdClass: 'col-2' },
+        { key: 'Users AC%', thClass: 'col-2', tdClass: 'col-2' }
+      ],
       items: []
     }
   },
@@ -57,4 +57,13 @@ export default {
 </script>
 
 <style lang="css" scoped>
+th .m-col-1 {
+  max-width: 10px;
+}
+th .m-col-2 {
+  max-width: 20%;
+}
+th .m-col-5 {
+  max-width: 50%;
+}
 </style>
