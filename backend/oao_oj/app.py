@@ -1,67 +1,27 @@
 import os
-import pymongo
 import json
 
-from flask import Flask, request, render_template, jsonify, Response
+from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 from oao_oj.mongo import Problem, get_all_problems
 from oao_oj.config import *
+
 from oao_oj.admin import admin_page
+from oao_oj.probs import probs_api
 
 app = Flask(__name__)
+
 app.register_blueprint(admin_page, url_prefix='/admin')
+app.register_blueprint(probs_api, url_prefix='/probs')
+
 CORS(app)
+
 
 def readAll(name):
     with open(name, 'r') as f:
         ret = f.read()
     return ret
-
-
-@app.route('/problems', methods=['GET'])
-@app.route('/problem/<pid>', methods=['GET', 'POST', 'PUT', 'DELETE'])
-def problem_entry(pid=None):
-    if not pid:
-        probs = get_all_problems()
-        probs = [{
-            'Id': p['pid'], 
-            'Name': p['title'], 
-            'Status': 0,
-            'Submissions AC%': 0,
-            'Users AC%': 0
-        } for p in probs]
-
-        return jsonify(probs)
-
-    method = request.method
-
-    if method == 'GET':
-        prob_detail = Problem(pid).detail
-        if not prob_detail:
-            return jsonify({'err': 'Problem not exists.'}), 404
-
-        return jsonify(prob_detail)
-
-    elif method == 'POST':
-        data = request.values
-        prob = Problem.add(pid, data)
-        if not prob:
-            return jsonify({'err': 'Problem exists.'}), 400
-
-        return jsonify({'msg': 'Ok.'})
-
-    elif method == 'PUT':
-        data = request.values
-
-        return Problem(pid).update(data)
-
-    elif method == 'DELETE':
-        count = Problem(pid).delete()
-        if not count:
-            return jsonify({'err': 'Problem not exists.'}), 404
-
-        return jsonify({'msg': 'Ok.'})
 
 
 @app.route('/accounts', methods=['GET', 'POST', 'PUT'])
