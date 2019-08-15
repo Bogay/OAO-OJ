@@ -35,7 +35,7 @@ var items = [
   { path: '/contests', name: 'Contests' },
   { path: '/discuss', name: 'Discuss' },
   { path: '/about', name: 'About' },
-  { path: '/manage', name: 'Manage' }
+  { path: '/manage/dashboard', name: 'Manage' }
 ]
 export default {
   name: 'Header',

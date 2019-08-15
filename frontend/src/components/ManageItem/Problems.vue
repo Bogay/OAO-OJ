@@ -1,24 +1,19 @@
 <template>
-  <div>
-    <b-collapse id="prob-detail">
-      <b-card>
-        <h2>ha, 想編輯題目? 自己來做啦哈哈哈哈哈哈哈哈嗚嗚嗚嗚嗚</h2>
-      </b-card>
-    </b-collapse>
-    <div class="container">
-      <b-table head-variant="dark" borderless striped hover :items="items" :fields="fields">
-        <template v-for="field in fields" :slot="field.key" slot-scope="data">
-          <div v-if="field.colType==='text'" :key="field.key">
-            {{ data.item[field.key] }}
-          </div>
-          <div v-else :key="field.key">
-            <b-button variant="primary" size="sm" v-b-toggle.prob-detail>
+  <div class="container">
+    <b-table head-variant="dark" borderless striped hover :items="items" :fields="fields">
+      <template v-for="field in fields" :slot="field.key" slot-scope="data">
+        <div v-if="field.colType==='text'" :key="field.key">
+          {{ data.item[field.key] }}
+        </div>
+        <div v-else :key="field.key">
+          <router-link :to="`/manage/editpro/${data.item['pid']}`">
+            <b-button variant="primary" size="sm">
               Edit
             </b-button>
-          </div>
-        </template>
-      </b-table>
-    </div>
+          </router-link>
+        </div>
+      </template>
+    </b-table>
   </div>
 </template>
 
@@ -31,23 +26,35 @@ export default {
   data () {
     return {
       fields: [
-        {key: 'Id', label: 'Id', colType: 'text'},
-        {key: 'Name', label: 'Name', colType: 'text'},
-        {key: 'Status', label: 'Status', colType: 'text'},
-        {key: 'Edit', label: 'Edit', colType: 'button'}
+        {key: 'pid', label: 'Id', colType: 'text'},
+        {key: 'title', label: 'Name', colType: 'text'},
+        {key: 'status', label: 'Status', colType: 'text'},
+        {key: 'edit', label: 'Edit', colType: 'button'}
       ],
       items: []
     }
   },
   mounted () {
-    this.$http.get(`${API_BASE_URL}/admin/problems`)
+    this.$http.get(`${API_BASE_URL}/admin/probs`)
       .then((response) => {
+        let data = response.data
+        data.forEach(el => {
+          let val = el['status']
+          switch (val) {
+            case 1:
+              el['status'] = 'Offline'
+              break
+            case 2:
+              el['status'] = 'Hidden'
+              break
+            default:
+              el['status'] = 'Online'
+          }
+        })
         this.items = response.data
-        console.log('data: ' + this.items)
       })
       .catch((error) => {
         this.items = error
-        console.log('err: ' + error)
       })
   }
 }
