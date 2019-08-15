@@ -1,4 +1,4 @@
-# API reference
+# [API reference](https://hackmd.io/@AlaRduTP/OAO-OJ-API)
 
 1. [Admin](#admin)
 2. [Judge](#judge)
@@ -8,8 +8,7 @@
 
 ### Status codes
 
-- 
-
+-  
   The following status codes are returned by the this API.
 
   | Status code | Description |
@@ -21,9 +20,7 @@
 
 ### Error responses
 
-- 
-
-  The following JSON data is returned in the response body when an error occurs.
+- The following JSON data is returned in the response body when an error occurs.
 
   | Property | Type | Description |
   | --- | --- | --- |
@@ -34,19 +31,16 @@
 ### Get problems list
 
 - 
-
   Get problems list that admin can manage.
 
 #### HTTP request
 
 - 
-
   `GET /admin/probs`
 
 #### Response
 
 - 
-
   Returns the status code `200` and an **array** of JSON objects with following information.
 
   | Property | Type | Description |
@@ -58,7 +52,6 @@
 #### Example response
 
 - 
-
   ```json
   [
       {
@@ -79,19 +72,16 @@
 ### Submit the script
 
 - 
-
   Submit the script and judge it.
 
 #### HTTP request
 
 - 
-
   `POST /judge/submit`
 
 #### Request body
 
 - 
-
   | Property | Type | Required | Description |
   | --- | --- | --- | --- |
   | pid | String | Required | Problem ID |
@@ -102,7 +92,6 @@
 #### Response
 
 - 
-
   Returns the status code `200` and JSON object with following information.
 
   | Property | Type | Description |
@@ -114,7 +103,6 @@
 #### Example response
 
 - 
-
   ```json
   {
       "scriptLen": 83,
@@ -131,19 +119,16 @@
 ### Get problems list
 
 - 
-
   Get problems list that all users can see it.
 
 #### HTTP request
 
 - 
-
   `GET /probs`
 
 #### Response
 
 - 
-
   Returns the status code `200` and an **array** of JSON objects with following information.
 
   | Property | Type | Description |
@@ -157,7 +142,6 @@
 #### Example response
 
 - 
-
   ```json
   [
       {
@@ -182,19 +166,16 @@
 ### Get details of a problem
 
 - 
-
   Get details of a problem that are displayed to all users.
 
 #### HTTP request
 
 - 
-
   `GET /probs/{pid}`
 
   **Path parameters**
   
   -
-
     | Parameter | Description |
     | --- | --- |
     | pid | Problem ID |
@@ -202,7 +183,6 @@
 #### Response
 
 - 
-
   Returns the status code `200` and JSON objects with following information.
 
   | Property | Type | Description |
@@ -214,7 +194,6 @@
 #### Example response
 
 - 
-
   ```json
   {
       "pid": "0000",
@@ -228,19 +207,16 @@
 ### Add a new problem
 
 - 
-
   Add a new problem to database.
 
 #### HTTP request
 
 - 
-
   `POST /probs/{pid}`
 
   **Path parameters**
   
   - 
-
     | Parameter | Description |
     | --- | --- |
     | pid | New problem ID |
@@ -248,7 +224,6 @@
 #### Request body
 
 - 
-
   | Property | Type | Required | Description |
   | --- | --- | --- | --- |
   | title | String | Required | Title of new problem |
@@ -259,7 +234,6 @@
   **Information of new problem**
   
   - 
-
     | Property | Type | Required | Description |
     | --- | --- | --- | --- |
     | testdatas | Array of arrays | Required | Array of *information arrays of testdata* |
@@ -267,7 +241,6 @@
     **Information array of testdata**
     
     - 
-
       | Index | Type | Description |
       | --- | --- | --- |
       | 0 | String | Testdata name |
@@ -277,7 +250,6 @@
   **Testdata of new problem**
   
   - 
-
     | Property | Type | Required | Description |
     | --- | --- | --- | --- |
     | *{name}* | Array of strings | Required | *User-defined data array* for each testdata |
@@ -285,7 +257,6 @@
     **Property parameters**
     
     - 
-
       | Parameter | Description |
       | --- | --- |
       | name | Testdata name |
@@ -293,7 +264,6 @@
     **User-defined data array**
     
     - 
-
       | Index | Type | Description |
       | --- | --- | --- |
       | 0 | String | Input data |
@@ -314,7 +284,6 @@
 #### Response
 
 - 
-
   Returns the status code `200` and JSON objects with following information.
 
   | Property | Type | Description |
@@ -324,7 +293,6 @@
 #### Example response
 
 - 
-
   ```json
   {
       "msg": "Ok."
@@ -336,19 +304,16 @@
 ### Delete a problem
 
 - 
-
   Remove a problem from database.
 
 #### HTTP request
 
 - 
-
   `DELETE /probs/{pid}`
 
   **Path parameters**
   
   - 
-
     | Parameter | Description |
     | --- | --- |
     | pid | Problem ID |
@@ -356,7 +321,6 @@
 #### Response
 
 - 
-
   Returns the status code `200` and JSON objects with following information.
 
   | Property | Type | Description |
