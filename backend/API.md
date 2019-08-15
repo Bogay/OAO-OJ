@@ -173,7 +173,7 @@
 - 
   `GET /probs/{pid}`
 
-  **Path parameters**
+  #### Path parameters
   
   -
     | Parameter | Description |
@@ -214,7 +214,7 @@
 - 
   `POST /probs/{pid}`
 
-  **Path parameters**
+  #### Path parameters
   
   - 
     | Parameter | Description |
@@ -231,14 +231,14 @@
   | info | JSON string | Required | *Information of new problem* |
   | testdatas | JSON string | Required | *Testdatas of new problem* |
 
-  **Information of new problem**
+  #### Information of new problem
   
   - 
     | Property | Type | Required | Description |
     | --- | --- | --- | --- |
     | testdatas | Array of arrays | Required | Array of *information arrays of testdata* |
 
-    **Information array of testdata**
+    #### Information array of testdata
     
     - 
       | Index | Type | Description |
@@ -247,21 +247,21 @@
       | 1 | Number | Time limit |
       | 2 | Number | Memory limit |
 
-  **Testdata of new problem**
+  #### Testdata of new problem
   
   - 
     | Property | Type | Required | Description |
     | --- | --- | --- | --- |
     | *{name}* | Array of strings | Required | *User-defined data array* for each testdata |
 
-    **Property parameters**
+    #### Property parameters
     
     - 
       | Parameter | Description |
       | --- | --- |
       | name | Testdata name |
 
-    **User-defined data array**
+    #### User-defined data array
     
     - 
       | Index | Type | Description |
@@ -311,7 +311,7 @@
 - 
   `DELETE /probs/{pid}`
 
-  **Path parameters**
+  #### Path parameters
   
   - 
     | Parameter | Description |
@@ -327,9 +327,11 @@
   | --- | --- | --- |
   | msg | String | Success message |
 
+#### Example response
 
-<style type="text/css">
-    ul li {
-        display: block;
-    }
-</style>
+- 
+  ```json
+  {
+      "msg": "Ok."
+  }
+  ```
