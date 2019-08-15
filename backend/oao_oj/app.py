@@ -4,7 +4,6 @@ import json
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from oao_oj.mongo import Problem, get_all_problems
 from oao_oj.config import *
 
 from oao_oj.admin import admin_page
