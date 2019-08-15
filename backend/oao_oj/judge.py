@@ -27,11 +27,11 @@ def submit():
 
     response = {
         'scriptLen': len(script),
-        'result': []
+        'results': []
     }
 
     if any(c in script for c in ['\n', '\r', ';']):
-        response['result'] = ['LLE']
+        response['results'] = ['LLE']
         return jsonify(response), 200
 
     with open(f'{TMP_DIR}/a.py', 'w') as f:
@@ -47,7 +47,7 @@ def submit():
             f.write(out_data)
 
         response['taskCount'] = 1
-        response['result'].append(judge(in_data_path, out_data_path))
+        response['results'].append(judge(in_data_path, out_data_path))
 
     else:
         # read problem info
@@ -60,7 +60,7 @@ def submit():
         for task, time_l, mem_l in info['testdatas']:
             in_data_path = f'{PROB_DIR}/{pid}/{TEST_DIR}/{task}.in'
             out_data_path = f'{PROB_DIR}/{pid}/{TEST_DIR}/{task}.out'
-            response['result'].append(judge(in_data_path, out_data_path))
+            response['results'].append(judge(in_data_path, out_data_path))
 
     return jsonify(response), 200
 

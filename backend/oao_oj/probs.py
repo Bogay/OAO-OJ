@@ -12,7 +12,7 @@ def problems_list():
         'pid': p['pid'], 
         'title': p['title'], 
         'status': 0,
-        'submiAcRate': 0,
+        'submissionsAcRate': 0,
         'usersAcRate': 0
     } for p in probs]
 

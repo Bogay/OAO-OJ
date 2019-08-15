@@ -10,7 +10,7 @@ def problems_list():
     ps = [{
         'pid': p['pid'], 
         'title': p['title'], 
-        'status': 1,
+        'status': 0,
     } for p in ps]
 
     return jsonify(ps)
