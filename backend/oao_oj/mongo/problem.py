@@ -87,22 +87,22 @@ class Problem():
 
 
     @property
-    def json(self):
-        '''JSON with detail of the problem.
-        None if the problem not exists, a string otherwise.
+    def detail(self):
+        '''A dict with detail of the problem.
+        None if the problem not exists, a dict otherwise.
         '''
         prob = COLL.find_one({'pid': self.pid})
 
         if not prob:
             return None
 
-        json = jsonify({
+        prob_dict = {
             'pid': prob['pid'],
             'title': prob['title'],
             'desc': self.desc
-        })
+        }
 
-        return json
+        return prob_dict
 
 
     def update(self, data):
@@ -130,13 +130,3 @@ def get_all_problems():
     ps = [*COLL.find({}, {'_id': 0, 'pid': 1, 'title': 1})]
 
     return ps
-
-    json = jsonify([{
-        'Id': p['pid'], 
-        'Name': p['title'], 
-        'Status': 0,
-        'Submissions AC%': 0,
-        'Users AC%': 0
-    } for p in ps])
-
-    return json

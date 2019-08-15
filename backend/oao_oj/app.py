@@ -37,11 +37,11 @@ def problem_entry(pid=None):
     method = request.method
 
     if method == 'GET':
-        json = Problem(pid).json
-        if not json:
+        prob_detail = Problem(pid).detail
+        if not prob_detail:
             return jsonify({'err': 'Problem not exists.'}), 404
 
-        return json
+        return jsonify(prob_detail)
 
     elif method == 'POST':
         data = request.values
