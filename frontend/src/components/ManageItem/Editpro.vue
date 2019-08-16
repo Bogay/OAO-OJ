@@ -33,9 +33,26 @@
         ></b-form-select>
       </b-form-group>
 
+      <div class="row">
+        <div class="col-6">
+          <b-form-group id="input-group-desc" label="description:" label-for="input-desc">
+            <b-form-textarea
+              id="input-desc"
+              v-model="form.desc"
+              placeholder="preview on the right side"
+              rows="3"
+            ></b-form-textarea>
+          </b-form-group>
+        </div>
+        <div class="col-6 prevw">
+          <vue-markdown>{{ form.desc }}</vue-markdown>
+        </div>
+      </div>
+
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
-      <!-- <b-button type="setdefault" variant="info">Defaults</b-button> -->
+      <b-button variant="info" @click="onDefault">Defaults</b-button>
+      <b-button variant="info" @click="onPreview">Preview</b-button>
     </b-form>
 
     <b-card class="mt-3" header="Form Data Result">
@@ -56,7 +73,8 @@ export default {
       form: {
         pid: '',
         title: '',
-        status: null
+        status: null,
+        desc: ''
       },
       status: [
         { text: 'Select One', value: null },
@@ -79,7 +97,7 @@ export default {
         // set default value
         this.form.pid = this.items.pid
         this.form.title = this.items.title
-        this.form.status.value = this.items.status
+        // this.form.status = this.items.status
       })
       .catch((error) => {
         this.items = error
@@ -96,27 +114,39 @@ export default {
       // Reset our form values
       this.form.pid = ''
       this.form.title = ''
-      this.form.status.value = null
+      this.form.status = null
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {
         this.show = true
       })
+    },
+    onDefault (evt) {
+      evt.preventDefault()
+      this.form.pid = this.items.pid
+      this.form.title = this.items.title
+      // this.form.status = this.items.status
+      this.show = false
+      this.$nextTick(() => {
+        this.show = true
+      })
+    },
+    onPreview (evt) {
+      evt.preventDefault()
+      this.show = false
+      this.$nextTick(() => {
+        this.show = true
+      })
     }
-    // onDefault (evt) {
-    //   // evt.preventDefault()
-    //   this.form.pid = this.items.pid
-    //   this.form.title = this.items.title
-    //   this.form.status.value = this.items.status
-    //   this.show = false
-    //   this.$nextTick(() => {
-    //     this.show = true
-    //   })
-    // }
   }
 }
 </script>
 
 <style lang="css" scoped>
-
+.prevw {
+  border: 0.1vw solid #ccc;
+  border-radius: 1vw;
+  max-height: 50vh;
+  overflow-y: auto;
+}
 </style>

@@ -2,14 +2,10 @@
   <b-container>
     <b-row>
       <b-col class="col-8">
-        <vue-markdown>
-          {{ introMD }}
-        </vue-markdown>
+        <vue-markdown>{{ introMD }}</vue-markdown>
       </b-col>
       <b-col class="col-4">
-        <vue-markdown>
-          {{ devlogMD }}
-        </vue-markdown>
+        <vue-markdown>{{ devlogMD }}</vue-markdown>
       </b-col>
     </b-row>
   </b-container>
