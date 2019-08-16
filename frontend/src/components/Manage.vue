@@ -1,14 +1,13 @@
 <template>
-  <div class="row">
+  <div class="row container-fluid">
     <div class="col-2 items">
       <b-nav vertical pills>
-        <b-nav-item v-for="comp in comps" :key="comp.name" :to="`/manage/${comp.path}`">
+        <b-nav-item v-for="comp in comps" :key="comp.name" :to="`/manage/${comp.path}`" class="item">
           {{ comp.name }}
         </b-nav-item>
       </b-nav>
     </div>
-    <div class="vl"></div>
-    <div class="col-9">
+    <div class="col-10">
       <router-view/>
     </div>
   </div>
@@ -33,11 +32,14 @@ export default {
 </script>
 
 <style lang="css" scoped>
+
 .items {
-  padding-left: 4vw;
+  height: 80vh;
+  padding-left: 2vw;
+  border-right: 0.2vw solid #50514f;
 }
 
-.vl {
-  border-left: 2px solid gray;
+.item {
+  border-bottom: 0.1vw solid #50514f;
 }
 </style>
