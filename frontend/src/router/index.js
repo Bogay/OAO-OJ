@@ -14,6 +14,7 @@ import ManageAcco from '@/components/ManageItem/Account'
 import ManageBull from '@/components/ManageItem/Bulletin'
 import ManageQues from '@/components/ManageItem/Question'
 import EditPro from '@/components/ManageItem/Editpro'
+import Pro from '@/components/Pro'
 
 Vue.use(Router)
 
@@ -62,6 +63,11 @@ export default new Router({
         { path: 'question', component: ManageQues },
         { path: 'editpro/:pid', component: EditPro }
       ]
+    },
+    {
+      path: '/pro/:id',
+      name: 'Pro',
+      component: Pro
     }
   ]
 })
