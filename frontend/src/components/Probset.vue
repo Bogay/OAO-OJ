@@ -8,6 +8,7 @@
 <script>
 const API_PORT = ':8000'
 const API_BASE_URL = location.origin.replace(/:\d+/g, API_PORT)
+const STATUS = ['Todo', 'Solved', 'Tried but in vain']
 
 export default {
   name: 'Probset',
@@ -29,17 +30,7 @@ export default {
       .then((response) => {
         let data = response.data
         data.forEach(el => {
-          let val = el['status']
-          switch (val) {
-            case 1:
-              el['status'] = 'Solved'
-              break
-            case 2:
-              el['status'] = 'Tried but in vain'
-              break
-            default:
-              el['status'] = 'Todo'
-          }
+          el['status'] = STATUS[el['status']]
         })
         this.items = response.data
       })

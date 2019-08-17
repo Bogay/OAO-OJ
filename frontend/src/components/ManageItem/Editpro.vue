@@ -24,14 +24,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-status" label="status:" label-for="input-status">
+      <!-- <b-form-group id="input-group-status" label="status:" label-for="input-status">
         <b-form-select
           id="input-status"
           v-model="form.status"
           :options="status"
           required
         ></b-form-select>
-      </b-form-group>
+      </b-form-group> -->
 
       <div class="row">
         <div class="col-6">
@@ -53,6 +53,7 @@
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button variant="info" @click="onDefault">Defaults</b-button>
       <b-button variant="info" @click="onPreview">Preview</b-button>
+      <b-button variant="danger" @click="onDelete">Delete</b-button>
     </b-form>
 
     <b-card class="mt-3" header="Form Data Result">
@@ -73,7 +74,7 @@ export default {
       form: {
         pid: '',
         title: '',
-        status: null,
+        // status: null,
         desc: ''
       },
       status: [
@@ -107,6 +108,13 @@ export default {
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
+      if (this.$route.params.pid === 'new') {
+        this.$http.post(`${API_BASE_URL}/probs/${this.form.pid}`, [this.form.pid, this.form.title, JSON.stringify(this.form.desc), JSON.stringify([])])
+          .then((response) => {
+            console.log(response)
+          })
+        window.location.replace('/#/manage/problems')
+      }
       alert(JSON.stringify(this.form))
     },
     onReset (evt) {
@@ -114,7 +122,7 @@ export default {
       // Reset our form values
       this.form.pid = ''
       this.form.title = ''
-      this.form.status = null
+      // this.form.status = null
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {
@@ -137,6 +145,15 @@ export default {
       this.$nextTick(() => {
         this.show = true
       })
+    },
+    onDelete (evt) {
+      evt.preventDefault()
+      this.$http.delete(`${API_BASE_URL}/probs/${this.$route.params.pid}`)
+        .then((response) => {
+          console.log(response)
+        })
+      window.location.replace('/#/manage/problems')
+      // after deleting we should redirect to manage/problems page
     }
   }
 }

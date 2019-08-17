@@ -29,6 +29,7 @@
 <script>
 const API_PORT = ':8000'
 const API_BASE_URL = location.origin.replace(/:\d+/g, API_PORT)
+const STATUS = ['Online', 'Offline', 'Hidden']
 
 export default {
   name: 'Problems',
@@ -48,17 +49,7 @@ export default {
       .then((response) => {
         let data = response.data
         data.forEach(el => {
-          let val = el['status']
-          switch (val) {
-            case 1:
-              el['status'] = 'Offline'
-              break
-            case 2:
-              el['status'] = 'Hidden'
-              break
-            default:
-              el['status'] = 'Online'
-          }
+          el['status'] = STATUS[el['status']]
         })
         this.items = response.data
       })
