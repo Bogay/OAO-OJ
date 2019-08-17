@@ -5,6 +5,11 @@
        url('/static/fonts/NotoSansTC-Regular.otf');
 }
 
+@font-face {
+  font-family: 'Monaco';
+  src: url('/static/fonts/monaco.ttf') format("truetype");
+}
+
 $bg-color: #f5f2f0;
 
 body {
