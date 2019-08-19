@@ -1,14 +1,13 @@
-import pymongo
 import os
 
-from oao_oj.config import PROB_COL, PROB_DIR
-from json import loads as json_loads
+from oao_oj.config import OJ_DB, PROB_COL, PROB_DIR
+from oao_oj.error import BadRequest, NotFound, NotAcceptable
+
+from json import dumps as json_dumps
 from flask import jsonify
 from shutil import rmtree
 
-CLIENT = pymongo.MongoClient('mongodb://localhost:27017/')
-DB = CLIENT['OAO-OJ']
-COLL = DB[PROB_COL]
+COLL = OJ_DB[PROB_COL]
 
 
 class Problem():
@@ -18,7 +17,7 @@ class Problem():
 
 
     @classmethod
-    def add(cls, pid: str, data: dict):
+    def add(cls, pid: str, data):
         '''A class method for adding the new problem to DB.
 
         Args:
@@ -33,21 +32,34 @@ class Problem():
                 }
 
         Returns:
-            None if the pid exists, Problem(pid) otherwise.
+            Problem instance: Problem(pid).
 
         '''
-        prob = cls(pid)
 
-        if prob.detail:
-            return None
+        # Check data
+        if data == None:
+            raise NotAcceptable('Invalid Content-Type or JSON data')
+
+        # Check pid
+        if COLL.find_one({'pid': pid}):
+            raise BadRequest('Problem exists.')
+
+        # Get title
+        title = data.get('title', '')
+
+        # Check status
+        status = data.get('status', 1)
+        if status not in range(3):
+            raise BadRequest('Invalid status.')
 
         # Insert the problem to DB
-        title = data.get('title', '')
         COLL.insert_one({
             'pid': pid,
-            'title': title
+            'title': title,
+            'status': status
         })
 
+        # Make dir for new problem
         ppath = f'{PROB_DIR}/{pid}'
         os.makedirs(ppath, exist_ok=True)
 
@@ -57,20 +69,21 @@ class Problem():
             f.write(desc)
 
         # Write the info.json
-        info = data.get('info', '')
+        info = json_dumps(data.get('info', {}))
         with open(f'{ppath}/info.json', 'w') as f:
             f.write(info)
 
+        # Make dir for testdatas
         os.makedirs(f'{ppath}/testdatas', exist_ok=True)
 
         # Write the testdatas
-        tds = json_loads(data.get('testdatas', '{}'))
+        tds = data.get('testdatas', {})
         for td in tds:
             for i, ex in enumerate(['in', 'out']):
                 with open(f'{ppath}/testdatas/{td}.{ex}', 'w') as f:
                     f.write(tds[td][i])
 
-        return prob
+        return cls(pid)
 
 
     @property
@@ -86,7 +99,6 @@ class Problem():
         return desc
 
 
-    @property
     def detail(self):
         '''A dict with detail of the problem.
         None if the problem not exists, a dict otherwise.
@@ -94,7 +106,7 @@ class Problem():
         prob = COLL.find_one({'pid': self.pid})
 
         if not prob:
-            return None
+            raise NotFound('Problem not exists.')
 
         prob_dict = {
             'pid': prob['pid'],
@@ -107,17 +119,50 @@ class Problem():
 
     def update(self, data):
         '''A method for updating the problem'''
-        return 'El psy congroo'
+
+        # Check data
+        if not data or None != data.get('status') not in range(3):
+            raise NotAcceptable('Invalid Content-Type or JSON data')
+
+        # Get update data
+        update_data = {k: data[k] for k in ['title', 'status'] if data.get(k) != None}
+        if not update_data:
+            raise NotFound('Nothing to update.')
+
+        # Update problem
+        result = COLL.update_one({'pid': self.pid}, {'$set': update_data})
+        if not result.matched_count:
+            raise NotFound('Problem not exists.')
+
+        ppath = f'{PROB_DIR}/{self.pid}'
+
+        # Update problem description
+        desc = data.get('desc')
+        if desc != None:
+            with open(f'{ppath}/prob.md', 'w') as f:
+                f.write(desc)
+
+        # Update info.json
+        info = data.get('info')
+        if info != None:
+            with open(f'{ppath}/info.json', 'w') as f:
+                f.write(json_dumps(info))
+
+        # Update testdatas
+        tds = data.get('testdatas', {})
+        for td in tds:
+            for i, ex in enumerate(['in', 'out']):
+                with open(f'{ppath}/testdatas/{td}.{ex}', 'w') as f:
+                    f.write(tds[td][i])
 
 
     def delete(self):
         '''A method for deleting the problem'''
         count = COLL.delete_one({'pid': self.pid}).deleted_count
+        if not count:
+            raise NotFound('Problem not exists.')
 
-        if count:
-            rmtree(f'{PROB_DIR}/{self.pid}', ignore_errors=True)
-
-        return count
+        rmtree(f'{PROB_DIR}/{self.pid}', ignore_errors=True)
 
 
 def get_all_problems():
@@ -127,6 +172,6 @@ def get_all_problems():
         A list of pid and title for each problem.
 
     '''
-    ps = [*COLL.find({}, {'_id': 0, 'pid': 1, 'title': 1})]
+    ps = [*COLL.find({}, {'_id': False})]
 
     return ps

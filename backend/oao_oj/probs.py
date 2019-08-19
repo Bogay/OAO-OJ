@@ -19,37 +19,11 @@ def problems_list():
     return jsonify(probs)
 
 
-@probs_api.route('/<pid>', methods=['GET', 'POST', 'PUT', 'DELETE'])
-def problem_entry(pid):
-    method = request.method
+@probs_api.route('/<pid>', methods=['GET'])
+def problem_detail(pid):
+    try:
+        prob_detail = Problem(pid).detail()
+    except Exception as e:
+        return e.response
 
-    # Get a problem's detail
-    if method == 'GET':
-        prob_detail = Problem(pid).detail
-        if not prob_detail:
-            return jsonify({'err': 'Problem not exists.'}), 404
-
-        return jsonify(prob_detail)
-
-    # Add a new problem
-    elif method == 'POST':
-        data = request.values
-        prob = Problem.add(pid, data)
-        if not prob:
-            return jsonify({'err': 'Problem exists.'}), 400
-
-        return jsonify({'msg': 'Ok.'})
-
-    # Update a problem
-    elif method == 'PUT':
-        data = request.values
-
-        return Problem(pid).update(data)
-
-    # Delete a problem
-    elif method == 'DELETE':
-        count = Problem(pid).delete()
-        if not count:
-            return jsonify({'err': 'Problem not exists.'}), 404
-
-        return jsonify({'msg': 'Ok.'})
+    return jsonify(prob_detail)

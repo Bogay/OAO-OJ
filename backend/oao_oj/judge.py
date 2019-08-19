@@ -16,14 +16,14 @@ def readAll(name):
 
 @judge_api.route('/submit', methods=['POST'])
 def submit():
-    pid = request.values.get('pid')
+    pid = request.json.get('pid')
 
     if not pid:
         return jsonify({'err': 'no selected problem!'}), 400
 
-    script = request.values.get('script', '').strip()
-    in_data = request.values.get('input-data', '')
-    out_data = request.values.get('output-data', '').strip()
+    script = request.json.get('script', '').strip()
+    in_data = request.json.get('input-data', '')
+    out_data = request.json.get('output-data', '').strip()
 
     response = {
         'scriptLen': len(script),

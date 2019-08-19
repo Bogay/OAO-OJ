@@ -1,4 +1,5 @@
 import os
+import pymongo
 
 # /path/to/backend
 BASE_PATH = os.getcwd()
@@ -22,3 +23,9 @@ TEST_DIR = '/testdatas'
 # Path for DB
 
 PROB_COL = 'problems'
+
+# ##
+# Const for Mongo
+
+MONGO_CLIENT = pymongo.MongoClient('mongodb://localhost:27017/')
+OJ_DB = MONGO_CLIENT['OAO-OJ']
