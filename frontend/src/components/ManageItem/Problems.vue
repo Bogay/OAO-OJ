@@ -14,6 +14,9 @@
         <div v-if="field.colType==='text'" :key="field.key">
           {{ data.item[field.key] }}
         </div>
+        <div v-else-if="field.colType==='link'" :key="field.key">
+          <router-link :to="`/pro/${data.item['pid']}`">{{ data.item[field.key] }}</router-link>
+        </div>
         <div v-else :key="field.key">
           <router-link :to="`/manage/editpro/${data.item['pid']}`">
             <b-button variant="primary" size="sm">
@@ -37,7 +40,7 @@ export default {
     return {
       fields: [
         {key: 'pid', label: 'Id', colType: 'text', thClass: 'col-1', tdClass: 'col-1'},
-        {key: 'title', label: 'Name', colType: 'text', thClass: 'col-7', tdClass: 'col-7'},
+        {key: 'title', label: 'Name', colType: 'link', thClass: 'col-7', tdClass: 'col-7'},
         {key: 'status', label: 'Status', colType: 'text', thClass: 'col-2', tdClass: 'col-2'},
         {key: 'edit', label: '', colType: 'button', thClass: 'col-2', tdClass: 'col-2'}
       ],

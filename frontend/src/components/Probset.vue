@@ -1,6 +1,9 @@
 <template>
   <div class="container">
     <b-table borderless striped hover :items="items" :fields="fields" :tbody-tr-class="'d-flex'" :thead-tr-class="'d-flex'">
+      <span slot="title" slot-scope="data">
+        <router-link :to="`/pro/${data.item.pid}`">{{ data.item.title }}</router-link>
+      </span>
     </b-table>
   </div>
 </template>
@@ -14,7 +17,6 @@ export default {
   name: 'Probset',
   data () {
     return {
-      // fields: ['Id', 'Name', 'Status', 'Submissions AC%', 'Users AC%'],
       fields: [
         { key: 'pid', label: 'Id', thClass: 'col-1', tdClass: 'col-1' },
         { key: 'title', label: 'Name', thClass: 'col-5', tdClass: 'col-5' },

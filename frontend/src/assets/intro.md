@@ -1,6 +1,6 @@
 ### Welcome to OAO Online Judge !
 
-an online judge that **O**nly **A**ccept **O**neline script.
+an online judge that <span style="color:#3495eb; font-size:24px;">**O**</span>nly <span style="color:#3495eb; font-size:24px;">**A**</span>ccept <span style="color:#3495eb; font-size:24px;">**O**</span>neline script.
 
 2019年的夏天，名為Ala的男人，僅用一行python code秒掉各種競賽題目
 

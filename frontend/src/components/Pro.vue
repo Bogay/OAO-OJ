@@ -20,7 +20,7 @@
       <div class="col-6 info-area">
         <b-card no-body>
           <b-tabs content-class="m-0" card fill>
-            <b-tab title="Description" active class="pt-0" ><h5>{{ pid }} - {{ title }}</h5><vue-markdown>{{ desc }}</vue-markdown></b-tab>
+            <b-tab title="Description" active class="pt-0" ><h5>{{ pid }} - {{ title }}</h5><vue-markdown :source='desc'></vue-markdown></b-tab>
             <b-tab title="Submission" class="pt-0"></b-tab>
             <b-tab title="Discussion" class="pt-0"></b-tab>
           </b-tabs>

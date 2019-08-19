@@ -24,14 +24,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <!-- <b-form-group id="input-group-status" label="status:" label-for="input-status">
+      <b-form-group id="input-group-status" label="status:" label-for="input-status">
         <b-form-select
           id="input-status"
           v-model="form.status"
           :options="status"
           required
         ></b-form-select>
-      </b-form-group> -->
+      </b-form-group>
 
       <div class="row">
         <div class="col-6">
@@ -74,7 +74,7 @@ export default {
       form: {
         pid: '',
         title: '',
-        // status: null,
+        status: null,
         desc: ''
       },
       status: [
@@ -91,27 +91,46 @@ export default {
     VueMarkdown
   },
   mounted () {
-    console.log(`${API_BASE_URL}/probs/${this.$route.params.pid}`)
-    this.$http.get(`${API_BASE_URL}/probs/${this.$route.params.pid}`)
-      .then((response) => {
-        this.items = response.data
-        // set default value
-        this.form.pid = this.items.pid
-        this.form.title = this.items.title
-        // this.form.status = this.items.status
-      })
-      .catch((error) => {
-        this.items = error
-        console.log('err: ' + error)
-      })
+    if (this.$route.params.pid !== 'new') {
+      this.$http.get(`${API_BASE_URL}/probs/${this.$route.params.pid}`)
+        .then((response) => {
+          this.items = response.data
+          // set default value
+          // console.log(JSON.stringify(this.items, null, 2))
+          this.form.title = this.items.title
+          this.form.status = this.items.status
+          this.form.desc = this.items.desc
+        })
+        .catch((error) => {
+          this.items = error
+          console.log('err: ' + error)
+        })
+    }
   },
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
+      let DATA = {
+        'title': this.form.title,
+        'status': this.form.status,
+        'desc': this.form.desc
+      }
       if (this.$route.params.pid === 'new') {
-        this.$http.post(`${API_BASE_URL}/probs/${this.form.pid}`, [this.form.pid, this.form.title, JSON.stringify(this.form.desc), JSON.stringify([])])
+        this.$http.post(`${API_BASE_URL}/admin/probs/${this.form.pid}`, DATA)
           .then((response) => {
-            console.log(response)
+            console.log(response.data)
+          })
+          .catch((error) => {
+            console.log(error.response.data)
+          })
+        window.location.replace('/#/manage/problems')
+      } else {
+        this.$http.put(`${API_BASE_URL}/admin/probs/${this.form.pid}`, DATA)
+          .then((response) => {
+            console.log(response.data)
+          })
+          .catch((error) => {
+            console.log(error.response.data)
           })
         window.location.replace('/#/manage/problems')
       }
@@ -122,7 +141,8 @@ export default {
       // Reset our form values
       this.form.pid = ''
       this.form.title = ''
-      // this.form.status = null
+      this.form.status = null
+      this.form.desc = ''
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {
@@ -133,7 +153,8 @@ export default {
       evt.preventDefault()
       this.form.pid = this.items.pid
       this.form.title = this.items.title
-      // this.form.status = this.items.status
+      this.form.status = this.items.status
+      this.form.desc = this.items.desc
       this.show = false
       this.$nextTick(() => {
         this.show = true
@@ -148,7 +169,7 @@ export default {
     },
     onDelete (evt) {
       evt.preventDefault()
-      this.$http.delete(`${API_BASE_URL}/probs/${this.$route.params.pid}`)
+      this.$http.delete(`${API_BASE_URL}/admin/probs/${this.$route.params.pid}`)
         .then((response) => {
           console.log(response)
         })
