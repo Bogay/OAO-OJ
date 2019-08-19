@@ -1,6 +1,5 @@
 <template>
-  <vue-markdown>
-  </vue-markdown>
+  <div></div>
 </template>
 
 <script>

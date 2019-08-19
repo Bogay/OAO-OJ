@@ -1,36 +1,45 @@
 <template>
-  <b-card no-body>
-    <b-tabs card pills vertical>
-      <b-tab v-for="component in componentNames" :title=component :key="component"><component  v-bind:is="component"></component></b-tab>
-    </b-tabs>
-  </b-card>
+  <div class="row container-fluid">
+    <div class="col-2 items">
+      <b-nav vertical pills>
+        <b-nav-item v-for="comp in comps" :key="comp.name" :to="`/manage/${comp.path}`" class="item">
+          {{ comp.name }}
+        </b-nav-item>
+      </b-nav>
+    </div>
+    <div class="col-10">
+      <router-view/>
+    </div>
+  </div>
 </template>
 
 <script>
-import Dashboard from './ManageItem/Dashboard'
-import Problems from './ManageItem/Problems'
-import Contests from './ManageItem/Contests'
-import Account from './ManageItem/Account'
-import Bulletin from './ManageItem/Bulletin'
-import Question from './ManageItem/Question'
-
 export default {
   name: 'Manage',
-  components: {
-    Dashboard, Problems, Contests, Account, Bulletin, Question
-  },
   data () {
     return {
-      componentNames: ['Dashboard', 'Problems', 'Contests', 'Account', 'Bulletin', 'Question']
+      comps: [
+        { path: 'dashboard', name: 'Dashboard' },
+        { path: 'problems', name: 'Problems' },
+        { path: 'contests', name: 'Contests' },
+        { path: 'account', name: 'Account' },
+        { path: 'bulletin', name: 'Bulletin' },
+        { path: 'question', name: 'Question' }
+      ]
     }
   }
 }
 </script>
 
 <style lang="css" scoped>
-.block {
-  background-color: #ddd;
-  height: 100%;
-  border-radius: 5px;
+
+.items {
+  height: 80vh;
+  padding-left: 2vw;
+  border-right: 0.2vw solid #50514f;
+}
+
+.item {
+  border-bottom: 0.1vw solid #50514f;
 }
 </style>

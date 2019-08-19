@@ -1,4 +1,3 @@
-
 ### Welcome to OAO Online Judge !
 
 an online judge that **O**nly **A**ccept **O**neline script.

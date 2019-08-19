@@ -7,6 +7,14 @@ import Contests from '@/components/Contests'
 import Discuss from '@/components/Discuss'
 import About from '@/components/About'
 import Manage from '@/components/Manage'
+import ManageDash from '@/components/ManageItem/Dashboard'
+import ManageProb from '@/components/ManageItem/Problems'
+import ManageCont from '@/components/ManageItem/Contests'
+import ManageAcco from '@/components/ManageItem/Account'
+import ManageBull from '@/components/ManageItem/Bulletin'
+import ManageQues from '@/components/ManageItem/Question'
+import EditPro from '@/components/ManageItem/Editpro'
+import Pro from '@/components/Pro'
 
 Vue.use(Router)
 
@@ -45,7 +53,21 @@ export default new Router({
     {
       path: '/manage',
       name: 'Manage',
-      component: Manage
+      component: Manage,
+      children: [
+        { path: 'dashboard', component: ManageDash },
+        { path: 'problems', component: ManageProb },
+        { path: 'contests', component: ManageCont },
+        { path: 'account', component: ManageAcco },
+        { path: 'bulletin', component: ManageBull },
+        { path: 'question', component: ManageQues },
+        { path: 'editpro/:pid', component: EditPro }
+      ]
+    },
+    {
+      path: '/pro/:id',
+      name: 'Pro',
+      component: Pro
     }
   ]
 })
