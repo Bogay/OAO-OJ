@@ -37,7 +37,7 @@ def submit():
     with open(f'{TMP_DIR}/a.py', 'w') as f:
         f.write(script)
 
-    if in_data or out_data:
+    if 'input-data' in request.json or 'output-data' in request.json:
         in_data_path = f'{TMP_DIR}/user.in'
         out_data_path = f'{TMP_DIR}/user.out'
 
