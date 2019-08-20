@@ -21,9 +21,17 @@ def problems_list():
 
 @probs_api.route('/<pid>', methods=['GET'])
 def problem_detail(pid):
+    prob = Problem(pid)
+
     try:
-        prob_detail = Problem(pid).detail()
+        prob_dt = prob.detail()
     except Exception as e:
         return e.response
+
+    prob_detail = {
+        'pid': prob_dt['pid'],
+        'title': prob_dt['title'],
+        'desc': prob.desc
+    }
 
     return jsonify(prob_detail)

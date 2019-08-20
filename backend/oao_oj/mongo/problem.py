@@ -1,9 +1,9 @@
 import os
 
-from oao_oj.config import OJ_DB, PROB_COL, PROB_DIR
+from oao_oj.config import OJ_DB, PROB_COL, PROB_DIR, TEST_DIR
 from oao_oj.error import BadRequest, NotFound, NotAcceptable
 
-from json import dumps as json_dumps
+from json import dumps as json_dumps, loads as json_loads
 from flask import jsonify
 from shutil import rmtree
 
@@ -99,22 +99,44 @@ class Problem():
         return desc
 
 
+    @property
+    def info(self):
+        try:
+            with open(f'{PROB_DIR}/{self.pid}/info.json') as f:
+                info = json_loads(f.read())
+        except:
+            info = {'testdatas': [['Error']]}
+
+        return info
+
+
+    @property
+    def testdatas(self):
+        testdatas = {}
+        tds = self.info.get('testdatas', [])
+        for td in tds:
+            datas = []
+            for ex in ['in', 'out']:
+                try:
+                    with open(f'{PROB_DIR}/{self.pid}/{TEST_DIR}/{td[0]}.{ex}') as f:
+                        datas.append(f.read())
+                except:
+                    datas.append(f'Error when reading {td[0]}.{ex}!')
+            testdatas[td[0]] = datas
+
+        return testdatas
+
+
     def detail(self):
         '''A dict with detail of the problem.
         None if the problem not exists, a dict otherwise.
         '''
-        prob = COLL.find_one({'pid': self.pid})
+        prob = COLL.find_one({'pid': self.pid}, {'_id': False})
 
         if not prob:
             raise NotFound('Problem not exists.')
 
-        prob_dict = {
-            'pid': prob['pid'],
-            'title': prob['title'],
-            'desc': self.desc
-        }
-
-        return prob_dict
+        return prob
 
 
     def update(self, data):

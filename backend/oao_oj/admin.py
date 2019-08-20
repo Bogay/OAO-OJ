@@ -17,13 +17,30 @@ def problems_list():
     return jsonify(ps)
 
 
-@admin_api.route('/probs/<pid>', methods=['POST', 'PUT', 'DELETE'])
+@admin_api.route('/probs/<pid>', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def manage_problem(pid):
     method = request.method
     data = request.json
 
+    # Get problem detail to manage
+    if method == 'GET':
+        prob = Problem(pid)
+
+        try:
+            prob_detail = prob.detail()
+        except Exception as e:
+            return e.response
+
+        prob_detail.update({
+            'desc': prob.desc,
+            'info': prob.info,
+            'testdatas': prob.testdatas
+        })
+
+        return jsonify(prob_detail)
+
     # Add a new problem
-    if method == 'POST':
+    elif method == 'POST':
         try:
             Problem.add(pid, data)
         except Exception as e:
@@ -33,7 +50,6 @@ def manage_problem(pid):
 
     # Update a problem
     elif method == 'PUT':
-
         try:
             Problem(pid).update(data)
         except Exception as e:
