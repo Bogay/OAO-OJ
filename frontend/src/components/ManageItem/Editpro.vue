@@ -10,7 +10,7 @@
           v-model="form.pid"
           type="text"
           required
-          :placeholder="`Enter pid, such as ${$route.params.pid}`"
+          placeholder="Enter pid, such as 0001"
         ></b-form-input>
       </b-form-group>
 
@@ -49,11 +49,17 @@
         </div>
       </div>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
+      <b-button variant="primary" v-b-modal="'modalSubmit'">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button variant="info" @click="onDefault">Defaults</b-button>
       <b-button variant="info" @click="onPreview">Preview</b-button>
-      <b-button variant="danger" @click="onDelete">Delete</b-button>
+      <b-button variant="danger" v-b-modal="'modalDelete'">Delete</b-button>
+      <b-modal id="modalSubmit" title="Caution!" @ok="onSubmit">
+        <p class="my-4">Are you sure you want to <strong>permanently</strong> change this problem?</p>
+      </b-modal>
+      <b-modal id="modalDelete" title="Caution!" @ok="onDelete">
+        <p class="my-4">Are you sure you want to <strong>permanently</strong> delete this problem?</p>
+      </b-modal>
     </b-form>
 
     <b-card class="mt-3" header="Form Data Result">
@@ -92,11 +98,12 @@ export default {
   },
   mounted () {
     if (this.$route.params.pid !== 'new') {
-      this.$http.get(`${API_BASE_URL}/probs/${this.$route.params.pid}`)
+      this.$http.get(`${API_BASE_URL}/admin/probs/${this.$route.params.pid}`)
         .then((response) => {
           this.items = response.data
           // set default value
-          // console.log(JSON.stringify(this.items, null, 2))
+          console.log(JSON.stringify(this.items, null, 2))
+          this.form.pid = this.$route.params.pid
           this.form.title = this.items.title
           this.form.status = this.items.status
           this.form.desc = this.items.desc
@@ -134,7 +141,6 @@ export default {
           })
         window.location.replace('/#/manage/problems')
       }
-      alert(JSON.stringify(this.form))
     },
     onReset (evt) {
       evt.preventDefault()
@@ -151,7 +157,7 @@ export default {
     },
     onDefault (evt) {
       evt.preventDefault()
-      this.form.pid = this.items.pid
+      this.form.pid = this.$route.params.pid
       this.form.title = this.items.title
       this.form.status = this.items.status
       this.form.desc = this.items.desc

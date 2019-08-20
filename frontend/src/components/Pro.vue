@@ -1,24 +1,9 @@
 <template>
   <div class="container-fluid">
-    <!-- Result dialog (now replace with swal)-->
-    <div class="modal fade" id="result-modal">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Result</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body" id="result">
-                    <div class="spinner-border"></div>
-                    Judging...
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="row">
       <!-- left part -->
-      <div class="col-6 info-area">
-        <b-card no-body>
+      <div class="col-6">
+        <b-card no-body class="info-area">
           <b-tabs content-class="m-0" card fill>
             <b-tab title="Description" active class="pt-0" ><h5>{{ pid }} - {{ title }}</h5><vue-markdown :source='desc'></vue-markdown></b-tab>
             <b-tab title="Submission" class="pt-0"></b-tab>
@@ -35,7 +20,7 @@
             <b-form-select v-model="selected" @change="onChange($event)" :options="options" size="sm" class="fss"></b-form-select>
           </div>
           <!-- codemirror -->
-          <div class="card-body p-0" v-if="show"><Editor :code="source" :fontSize="fontSizeValue"></Editor></div>
+          <div class="card-body p-0" v-if="show"><Editor :source="source" :fontSize="fontSizeValue"></Editor></div>
         </div>
         <!-- test-area -->
         <b-tabs no-fade class="mt-3">
@@ -48,9 +33,9 @@
         </b-tabs>
         <div class="mt-3">
           <b-button-group>
-            <b-button class="tri-btn" variant="primary">Test</b-button>
-            <b-button class="tri-btn" variant="success">Submit</b-button>
-            <b-button class="tri-btn" variant="dark">Fuck Line Breaks</b-button>
+            <b-button type="submit" class="tri-btn" variant="primary">Test</b-button>
+            <b-button type="submit" class="tri-btn" variant="success">Submit</b-button>
+            <b-button class="tri-btn" variant="dark">Statistics</b-button>
           </b-button-group>
         </div>
       </div>
@@ -64,6 +49,7 @@ import VueMarkdown from 'vue-markdown'
 
 const API_PORT = ':8000'
 const API_BASE_URL = location.origin.replace(/:\d+/g, API_PORT)
+const FONTSIZE_OPTION = [8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 24, 32, 48]
 
 export default {
   name: 'Pro',
@@ -73,21 +59,7 @@ export default {
       title: '',
       desc: 'loading',
       selected: 12,
-      options: [
-        { value: 8, text: '8' },
-        { value: 9, text: '9' },
-        { value: 10, text: '10' },
-        { value: 11, text: '11' },
-        { value: 12, text: '12' },
-        { value: 13, text: '13' },
-        { value: 14, text: '14' },
-        { value: 15, text: '15' },
-        { value: 16, text: '16' },
-        { value: 18, text: '18' },
-        { value: 24, text: '24' },
-        { value: 32, text: '32' },
-        { value: 48, text: '48' }
-      ],
+      options: FONTSIZE_OPTION,
       source: 'print(\'Hello, World!\')',
       fontSizeValue: '12px',
       show: true,
@@ -113,6 +85,16 @@ export default {
   methods: {
     onChange (event) {
       this.fontSizeValue = this.selected + 'px'
+    },
+    onSubmit (event) {
+      let DATA
+      this.$http.get(`${API_BASE_URL}/judge/submit`, DATA)
+        .then((response) => {
+          console.log(JSON.stringify(response, null, 2))
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 }
@@ -120,6 +102,7 @@ export default {
 
 <style lang="scss">
 .info-area {
+  height: 85vh;
   overflow-y: auto;
 }
 
@@ -138,7 +121,7 @@ export default {
 }
 
 .tri-btn {
-  font-size: 1.2vw;
-  width: 15vw;
+  font-size: 1.25vw;
+  width: 16vw;
 }
 </style>

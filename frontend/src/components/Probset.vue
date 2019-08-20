@@ -4,6 +4,9 @@
       <span slot="title" slot-scope="data">
         <router-link :to="`/pro/${data.item.pid}`">{{ data.item.title }}</router-link>
       </span>
+      <span slot="status" slot-scope="data" v-bind:style="{ color: STATUS_COLOR[data.item.status] }">
+        {{ STATUS[data.item.status] }}
+      </span>
     </b-table>
   </div>
 </template>
@@ -11,7 +14,6 @@
 <script>
 const API_PORT = ':8000'
 const API_BASE_URL = location.origin.replace(/:\d+/g, API_PORT)
-const STATUS = ['Todo', 'Solved', 'Tried but in vain']
 
 export default {
   name: 'Probset',
@@ -24,20 +26,18 @@ export default {
         { key: 'submissionsAcRate', label: 'Submissions AC%', thClass: 'col-2', tdClass: 'col-2' },
         { key: 'usersAcRate', label: 'Users AC%', thClass: 'col-2', tdClass: 'col-2' }
       ],
-      items: []
+      items: [],
+      STATUS: ['Todo', 'Solved', 'Tried but in vain'],
+      STATUS_COLOR: ['#000', '#3ae061', '#ff5475']
     }
   },
   mounted () {
     this.$http.get(`${API_BASE_URL}/probs`)
       .then((response) => {
-        let data = response.data
-        data.forEach(el => {
-          el['status'] = STATUS[el['status']]
-        })
         this.items = response.data
       })
       .catch((error) => {
-        this.items = error
+        console.log(error)
       })
   }
 }

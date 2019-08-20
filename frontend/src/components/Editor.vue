@@ -25,9 +25,10 @@ import 'codemirror/keymap/sublime.js'
 
 export default {
   name: 'Editor',
-  props: ['code', 'fontSize'],
+  props: ['source', 'fontSize'],
   data () {
     return {
+      code: this.source,
       cmOption: {
         autoCloseBrackets: true,
         tabSize: 4,
