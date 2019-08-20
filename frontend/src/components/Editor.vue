@@ -1,5 +1,5 @@
 <template>
-  <codemirror v-model="code" :options="cmOption" v-bind:style="{ 'font-size': fontSize }"></codemirror>
+  <codemirror v-model="code" :options="cmOption" v-bind:style="{ 'font-size': fontSize }" @input="codeChange"></codemirror>
 </template>
 
 <script>
@@ -43,6 +43,11 @@ export default {
   },
   components: {
     codemirror
+  },
+  methods: {
+    codeChange () {
+      this.$emit('updateCode', this.code)
+    }
   }
 }
 </script>

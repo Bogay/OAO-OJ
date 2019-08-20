@@ -33,8 +33,8 @@
         </b-tabs>
         <div class="mt-3">
           <b-button-group>
-            <b-button type="submit" class="tri-btn" variant="primary">Test</b-button>
-            <b-button type="submit" class="tri-btn" variant="success">Submit</b-button>
+            <b-button class="tri-btn" variant="primary" @click="onTest">Test</b-button>
+            <b-button class="tri-btn" variant="success" @click="onSubmit">Submit</b-button>
             <b-button class="tri-btn" variant="dark">Statistics</b-button>
           </b-button-group>
         </div>
@@ -46,6 +46,7 @@
 <script>
 import Editor from './Editor'
 import VueMarkdown from 'vue-markdown'
+import swal from 'sweetalert'
 
 const API_PORT = ':8000'
 const API_BASE_URL = location.origin.replace(/:\d+/g, API_PORT)
@@ -83,14 +84,53 @@ export default {
       })
   },
   methods: {
+    getChildText (value) {
+      this.source = value
+    },
     onChange (event) {
       this.fontSizeValue = this.selected + 'px'
     },
-    onSubmit (event) {
-      let DATA
-      this.$http.get(`${API_BASE_URL}/judge/submit`, DATA)
+    onTest (event) {
+      let DATA = {
+        'pid': this.pid,
+        'script': this.source,
+        'input-data': this.input,
+        'output-data': this.output
+      }
+      this.$http.post(`${API_BASE_URL}/judge/submit`, DATA)
         .then((response) => {
-          console.log(JSON.stringify(response, null, 2))
+          console.log(JSON.stringify(DATA, null, 2))
+          console.log(JSON.stringify(response.data, null, 2))
+          if (response.data.results[0] === 'AC') {
+            swal('Test Result: YES', '', 'success')
+          } else if (response.data.results[0] === 'WA') {
+            swal('Test Result: NO', '', 'error')
+          } else if (response.data.results[0] === 'LLE') {
+            swal('Test Result: LLE', 'Your source code is more than one line(contain \\n, \\r, ;).', 'error')
+          } else {
+            swal('Judge Error', 'please contact with us, sorry!', 'info')
+          }
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    onSubmit (event) {
+      let DATA = {
+        'pid': this.pid,
+        'script': this.source
+      }
+      this.$http.post(`${API_BASE_URL}/judge/submit`, DATA)
+        .then((response) => {
+          if (response.data.results[0] === 'AC') {
+            swal('Accepted', 'You solved the problem!', 'success')
+          } else if (response.data.results[0] === 'WA') {
+            swal('Wrong Answer', 'Your output is not correct.', 'error')
+          } else if (response.data.results[0] === 'LLE') {
+            swal('Line Limit Exceeded', 'Your source code is more than one line(contain \\n, \\r, ;).', 'error')
+          } else {
+            swal('Judge Error', 'please contact with us, sorry!', 'info')
+          }
         })
         .catch((error) => {
           console.log(error)

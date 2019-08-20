@@ -34,32 +34,26 @@
       </b-form-group>
 
       <div class="row">
-        <div class="col-6">
+        <div class="col-12">
           <b-form-group id="input-group-desc" label="description:" label-for="input-desc">
             <b-form-textarea
               id="input-desc"
               v-model="form.desc"
-              placeholder="preview on the right side"
+              placeholder="problem description in markdown"
               rows="3"
             ></b-form-textarea>
           </b-form-group>
         </div>
-        <div class="col-6 prevw">
+        <!-- <div class="col-6 prevw">
           <vue-markdown>{{ form.desc }}</vue-markdown>
-        </div>
+        </div> -->
       </div>
 
-      <b-button variant="primary" v-b-modal="'modalSubmit'">Submit</b-button>
+      <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button variant="info" @click="onDefault">Defaults</b-button>
       <b-button variant="info" @click="onPreview">Preview</b-button>
-      <b-button variant="danger" v-b-modal="'modalDelete'">Delete</b-button>
-      <b-modal id="modalSubmit" title="Caution!" @ok="onSubmit">
-        <p class="my-4">Are you sure you want to <strong>permanently</strong> change this problem?</p>
-      </b-modal>
-      <b-modal id="modalDelete" title="Caution!" @ok="onDelete">
-        <p class="my-4">Are you sure you want to <strong>permanently</strong> delete this problem?</p>
-      </b-modal>
+      <b-button variant="danger" @click="onDelete">Delete</b-button>
     </b-form>
 
     <b-card class="mt-3" header="Form Data Result">
@@ -70,6 +64,7 @@
 
 <script>
 import VueMarkdown from 'vue-markdown'
+import swal from 'sweetalert'
 const API_PORT = ':8000'
 const API_BASE_URL = location.origin.replace(/:\d+/g, API_PORT)
 
@@ -102,15 +97,13 @@ export default {
         .then((response) => {
           this.items = response.data
           // set default value
-          console.log(JSON.stringify(this.items, null, 2))
           this.form.pid = this.$route.params.pid
           this.form.title = this.items.title
           this.form.status = this.items.status
           this.form.desc = this.items.desc
         })
         .catch((error) => {
-          this.items = error
-          console.log('err: ' + error)
+          console.log(error)
         })
     }
   },
@@ -125,21 +118,21 @@ export default {
       if (this.$route.params.pid === 'new') {
         this.$http.post(`${API_BASE_URL}/admin/probs/${this.form.pid}`, DATA)
           .then((response) => {
-            console.log(response.data)
+            swal('Success', 'the problem has been added.', 'success')
+            window.location.replace('/#/manage/problems')
           })
           .catch((error) => {
-            console.log(error.response.data)
+            swal('Fail', error, 'error')
           })
-        window.location.replace('/#/manage/problems')
       } else {
         this.$http.put(`${API_BASE_URL}/admin/probs/${this.form.pid}`, DATA)
           .then((response) => {
-            console.log(response.data)
+            swal('Success', 'the problem has been updated.', 'success')
+            window.location.replace('/#/manage/problems')
           })
           .catch((error) => {
-            console.log(error.response.data)
+            swal('Fail', error, 'error')
           })
-        window.location.replace('/#/manage/problems')
       }
     },
     onReset (evt) {
@@ -166,31 +159,37 @@ export default {
         this.show = true
       })
     },
-    onPreview (evt) {
-      evt.preventDefault()
-      this.show = false
-      this.$nextTick(() => {
-        this.show = true
-      })
-    },
     onDelete (evt) {
       evt.preventDefault()
-      this.$http.delete(`${API_BASE_URL}/admin/probs/${this.$route.params.pid}`)
-        .then((response) => {
-          console.log(response)
+      swal({
+        title: 'Are you sure?',
+        text: 'Once deleted, you will not be able to recover this problem!',
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true
+      })
+        .then((willDelete) => {
+          if (willDelete) {
+            this.$http.delete(`${API_BASE_URL}/admin/probs/${this.$route.params.pid}`)
+              .then((response) => {
+                swal('Boo! The problem has been deleted!', {icon: 'success'})
+                window.location.replace('/#/manage/problems')
+              })
+              .catch((error) => {
+                swal('Oops! Failed to delete the problem!' + error, {icon: 'info'})
+              })
+          }
         })
-      window.location.replace('/#/manage/problems')
-      // after deleting we should redirect to manage/problems page
     }
   }
 }
 </script>
 
 <style lang="css" scoped>
-.prevw {
+/*.prevw {
   border: 0.1vw solid #ccc;
   border-radius: 1vw;
   max-height: 50vh;
   overflow-y: auto;
-}
+}*/
 </style>
