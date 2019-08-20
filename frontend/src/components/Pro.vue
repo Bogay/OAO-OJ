@@ -20,7 +20,9 @@
             <b-form-select v-model="selected" @change="onChange($event)" :options="options" size="sm" class="fss"></b-form-select>
           </div>
           <!-- codemirror -->
-          <div class="card-body p-0" v-if="show"><Editor :source="source" :fontSize="fontSizeValue"></Editor></div>
+          <div class="card-body p-0" v-if="show">
+            <Editor :source="source" :fontSize="fontSizeValue" v-on:childMethod="parentMethod"></Editor>
+          </div>
         </div>
         <!-- test-area -->
         <b-tabs no-fade class="mt-3">
@@ -84,7 +86,7 @@ export default {
       })
   },
   methods: {
-    getChildText (value) {
+    parentMethod (value) {
       this.source = value
     },
     onChange (event) {

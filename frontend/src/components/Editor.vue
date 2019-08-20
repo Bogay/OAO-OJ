@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     codeChange () {
-      this.$emit('updateCode', this.code)
+      this.$emit('childMethod', this.code)
     }
   }
 }
