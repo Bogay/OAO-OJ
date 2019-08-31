@@ -34,6 +34,7 @@ or
 ```
 use OAO-OJ
 db.createCollection('problems')
+db.createCollection('users')
 db.problems.insertOne({'pid': '0000', 'title': 'Hello, OAO-OJ'})
 ```
 

@@ -24,6 +24,8 @@ TEST_DIR = '/testdatas'
 
 PROB_COL = 'problems'
 
+USER_COL = 'users'
+
 # ##
 # Const for Mongo
 
