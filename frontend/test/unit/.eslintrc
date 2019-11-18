@@ -1,7 +1,10 @@
 {
-  "env": { 
+  "env": {
     "jest": true
   },
-  "globals": { 
+  "globals": {
+    "vue-jest": {
+      "babelConfig": false
+    }
   }
 }
