@@ -1,0 +1,21 @@
+name: Test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    # # clone repo and setup node
+    # - uses: actions/checkout@v1
+    # - uses: actions/setup-node
+    #   with:
+    #     node-version: '8.x' 
+    # just echo some text
+    - name: Echo
+      run: echo Hello, Github Action!
+    # - name: Run jest
+    #   working-directory: frontend
+    #   run: |
+    #     npm install
+    #     npm run unit
